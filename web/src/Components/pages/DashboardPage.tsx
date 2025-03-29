@@ -6,7 +6,7 @@ export default function DashboardPage() {
   return (
     <GridLayoutComponent>
       <Panel title={"Status"} icon={<IoRadio />}>
-        <p>Hallo</p>
+        <p>Hallo </p>
       </Panel>
     </GridLayoutComponent>
   );

@@ -14,7 +14,7 @@ const DynamicGrid: React.FC<DynamicGridProps> = ({ children }) => {
   });
 
   return (
-    <div className="bg-zinc-900 min-h-screen p-6 overflow-y-auto overflow-x-hidden">
+    <div className="bg-zinc-900 min-h-full p-6 overflow-y-auto overflow-x-hidden">
       <div className="responsive-row">
         {columns.map((column, colIndex) => (
           <div className="responsive-columns" key={colIndex}>

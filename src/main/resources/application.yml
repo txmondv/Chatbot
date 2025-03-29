@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 spring:
   datasource:
     url: "jdbc:h2:file:./data/db"
@@ -9,3 +6,33 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  main:
+    banner-mode: off
+    allow-bean-definition-overriding: true
+  shell:
+    interactive:
+      enabled: true
+    history:
+      enabled: true
+      name: ./logs/shell.log
+    jline:
+      terminal: jansi
+  output:
+    ansi:
+      enabled: DETECT
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss}] [%thread/%level] [%logger]: %msg%n"
+    file: "[%d{yyyy-MM-dd HH:mm:ss}] [%thread/%level] [%logger]: %msg%n"
+  file:
+    name: ./logs/system.log
+  level:
+    root: INFO
+    org.springframework: ERROR
+    org.hibernate: ERROR
+    org.apache: ERROR
+    org.flywaydb: ERROR
+    com.zaxxer: ERROR
+    org.jline: ERROR
+    com.ij11.chatbot: INFO
