@@ -1,7 +1,7 @@
-package com.ij11.chatbot.commands.containers;
+package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.commands.CommandManager;
-import com.ij11.chatbot.config.WebServerConfig;
+import com.ij11.chatbot.config.commands.CommandManager;
+import com.ij11.chatbot.config.ChatbotUserConfig;
 import com.ij11.chatbot.dto.ollama.OllamaModel;
 import com.ij11.chatbot.service.chat.OllamaInfoService;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class LLMCommands {
 
     @ShellMethod("Checks if Ollama is running")
     public void ollamaCheck() {
-        String ollamaLocation = WebServerConfig.getOllamaAddress() + ":" + WebServerConfig.getOllamaPort();
+        String ollamaLocation = ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort();
         if (ollamaInfoService.isOllamaRunning()) CommandManager.logCommandResult("LLM", "Ollama is running at " + ollamaLocation);
         else CommandManager.logCommandResult("LLM", "Ollama is not reachable at " + ollamaLocation);
     }
@@ -39,17 +39,17 @@ public class LLMCommands {
             return;
         }
 
-        CommandManager.logCommandResult("LLM", ollamaInfoService.getModelNames());
+        CommandManager.logCommandResult("LLM", ollamaInfoService.getModelNames().toString());
     }
 
-    @ShellMethod("Prints details of a specific Ollama model")
-    public void ollamaModel(String modelName) {
+    @ShellMethod("Prints tags of a specific Ollama model")
+    public void ollamaModelTags(String modelName) {
         if (!ollamaInfoService.isOllamaRunning()) {
             CommandManager.logCommandResult("LLM", "Ollama is not reachable");
             return;
         }
 
-        Optional<OllamaModel> model = ollamaInfoService.getModel(modelName);
+        Optional<OllamaModel> model = ollamaInfoService.getModelTags(modelName);
 
         if (model.isPresent()) {
             CommandManager.logCommandResult("LLM", model.get().toString());

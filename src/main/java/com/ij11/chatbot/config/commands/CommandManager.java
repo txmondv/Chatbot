@@ -1,4 +1,4 @@
-package com.ij11.chatbot.commands;
+package com.ij11.chatbot.config.commands;
 
 import org.slf4j.LoggerFactory;
 

@@ -66,6 +66,10 @@ export class FetchWrapper {
     return this.request("PUT", url, body, options);
   }
 
+  static async patch<T>(url: string, body?: unknown, options?: RequestInit): Promise<T> {
+    return this.request("PATCH", url, body ?? undefined, options);
+  }
+  
   static async delete<T>(url: string, options?: RequestInit): Promise<T> {
     return this.request("DELETE", url, undefined, options);
   }

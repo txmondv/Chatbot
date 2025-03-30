@@ -1,6 +1,6 @@
-package com.ij11.chatbot.commands.containers;
+package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.commands.CommandManager;
+import com.ij11.chatbot.config.commands.CommandManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.shell.standard.ShellComponent;
@@ -23,15 +23,21 @@ public class APICommands {
     public void routes(@ShellOption(defaultValue = ShellOption.NULL, help = "Path under which the routes are registered") String path) {
         List<RouteInfo> routes = new ArrayList<>();
 
+        List<String> excludedPaths = List.of("/error");
+
         requestMappingHandlerMapping.getHandlerMethods().keySet()
                 .forEach(info -> {
-                    Set<String> paths = info.getDirectPaths();
-                    if (!paths.isEmpty() && !paths.stream().sorted().findFirst().orElse("").equals("/error")) {
-                        String firstPath = paths.stream().sorted().findFirst().orElse(null);
-                        if (path != null && !firstPath.startsWith(path)) return;
-                        routes.add(new RouteInfo(info.getMethodsCondition().toString(), firstPath));
-                    }
+                    Set<String> paths;
+
+                    if (info.getPathPatternsCondition() != null) paths = info.getPathPatternsCondition().getPatternValues();
+                    else paths = info.getDirectPaths();
+
+                    paths.stream()
+                            .sorted()
+                            .filter(p -> !excludedPaths.contains(p) && (path == null || p.startsWith(path)))
+                            .forEach(p -> routes.add(new RouteInfo(info.getMethodsCondition().toString(), p)));
                 });
+
 
         routes.sort(Comparator.comparing(RouteInfo::getPath));
         routes.forEach(route -> CommandManager.logCommandResult("Route", route.toString()));

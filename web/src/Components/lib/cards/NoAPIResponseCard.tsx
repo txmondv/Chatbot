@@ -7,7 +7,7 @@ interface NoAPIResponseCardProps {
 const NoAPIResponseCard: React.FC<NoAPIResponseCardProps> = ({ className = "" }) => {
     return (
         <div className={`bg-zinc-800 text-white rounded-xl ${className}`}>
-            <p className="text-red-300">The API is currently not reachable. Maybe the server shut down?</p>
+            <p className="text-red-300">Die API ist derzeit nicht erreichbar. Läuft der Server noch?</p>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, } from "react";
-import { BsChevronBarLeft, BsChevronBarRight } from "react-icons/bs";
+import { BsChat, BsChevronBarLeft, BsChevronBarRight } from "react-icons/bs";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { useNavigate } from "react-router";
 import logo from "../../../assets/sidebar-icon.png";
@@ -67,6 +67,14 @@ const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
                     active={false}
                     alert={false}
                     onClick={"/"}
+                    expanded={expanded}
+                />
+                <SidebarItem
+                    icon={<BsChat />}
+                    title={"Chats"}
+                    active={false}
+                    alert={false}
+                    onClick={"/chats/"}
                     expanded={expanded}
                 />
             </nav>

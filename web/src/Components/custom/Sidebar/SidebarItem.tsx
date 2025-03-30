@@ -20,7 +20,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
                                                             onClick,
                                                             expanded,
                                                             isStandalone = true,
-                                                            hideBorder = false
+                                                            hideBorder = true
                                                         }) => {
     const navigate = useNavigate();
  
@@ -28,7 +28,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
         <div onClick={typeof onClick == "string" ? () => navigate(onClick) : onClick}>
             <li
                 className={`
-                    transition-all relative flex items-center py-2 px-3 my-1
+                    transition-all duration-300 relative flex items-center py-2 px-3 my-1
                     font-medium rounded-md cursor-pointer group
                     ${isStandalone
                     ? !hideBorder && `border-b rounded-b-none border-gray-400`
@@ -57,7 +57,7 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
                         className={`
                           absolute left-full rounded-md px-2 py-1 ml-6
                           bg-indigo-100 text-indigo-800 text-sm
-                          invisible opacity-20 -translate-x-3 transition-all
+                          invisible opacity-20 -translate-x-3 transition-opacity duration-300 ease-in-out
                           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
                         `}
                     >

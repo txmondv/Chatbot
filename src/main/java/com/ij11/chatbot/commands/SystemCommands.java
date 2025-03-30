@@ -1,7 +1,7 @@
-package com.ij11.chatbot.commands.containers;
+package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.commands.CommandManager;
-import com.ij11.chatbot.config.WebServerConfig;
+import com.ij11.chatbot.config.commands.CommandManager;
+import com.ij11.chatbot.config.ChatbotUserConfig;
 import com.ij11.chatbot.config.infrastrcuture.ConfigManager;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -13,7 +13,7 @@ public class SystemCommands {
 
     @ShellMethod("Returns the port the server is running on")
     public void port() {
-        CommandManager.logCommandResult("Port", WebServerConfig.getWebserverPort().toString());
+        CommandManager.logCommandResult("Port", ChatbotUserConfig.getWebserverPort().toString());
     }
 
     @ShellMethod("Reloads configuration files. Attention: Some changes may not be applied until the server is restarted.")

@@ -60,7 +60,7 @@ public class AuthController {
         }
 
         String username = jwtUtil.extractUsername(refreshToken);
-        String newAccessToken = jwtUtil.generateToken(username);
+        String newAccessToken = jwtUtil.generateRefreshToken(username);
 
         return new AuthResponse(true, newAccessToken);
     }

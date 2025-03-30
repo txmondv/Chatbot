@@ -1,23 +1,27 @@
 package com.ij11.chatbot.service.chat;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ij11.chatbot.config.WebServerConfig;
+import com.ij11.chatbot.config.ChatbotUserConfig;
 import com.ij11.chatbot.dto.ollama.OllamaModel;
 import com.ij11.chatbot.dto.ollama.OllamaResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
+@RequiredArgsConstructor
 public class OllamaInfoService {
 
     private static HttpURLConnection getHttpURLConnection(String endpoint) throws IOException {
-        URL url = new URL(WebServerConfig.getOllamaAddress() + ":" + WebServerConfig.getOllamaPort() + endpoint);
+        URL url = new URL(ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort() + endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
@@ -50,7 +54,7 @@ public class OllamaInfoService {
 
     public boolean isOllamaRunning() {
         try {
-            URL url = new URL(WebServerConfig.getOllamaAddress() + ":" + WebServerConfig.getOllamaPort() + "/api/tags");
+            URL url = new URL(ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort() + "/api/tags");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
             connection.disconnect();
@@ -68,13 +72,13 @@ public class OllamaInfoService {
         }
     }
 
-    public String getModelNames() {
+    public List<String> getModelNames() {
         return fetchOllamaTags().getModels().stream()
                 .map(OllamaModel::getName)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.toList());
     }
 
-    public Optional<OllamaModel> getModel(String modelName) {
+    public Optional<OllamaModel> getModelTags(String modelName) {
         return fetchOllamaTags().getModels().stream()
                 .filter(m -> m.getName().equalsIgnoreCase(modelName))
                 .findFirst();
