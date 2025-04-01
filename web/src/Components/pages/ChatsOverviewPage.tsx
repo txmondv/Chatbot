@@ -94,7 +94,7 @@ const ChatsOverviewPage = () => {
             </div>
             <div className="w-full max-w-[80%] p-4 rounded-lg flex flex-col gap-4">
                 {chats?.length ? (
-                    chats.map((chat) => (
+                    chats.reverse().map((chat) => (
                         <div 
                             key={chat.id} 
                             className="p-4 bg-gray-700 rounded-lg text-white hover:bg-gray-600 flex justify-between items-center"

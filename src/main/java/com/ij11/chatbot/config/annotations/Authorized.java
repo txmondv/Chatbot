@@ -1,12 +1,11 @@
-package com.ij11.chatbot.config.infrastrcuture.annotations;
+package com.ij11.chatbot.config.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ConfigFile {
-    String value();
+public @interface Authorized {
 }

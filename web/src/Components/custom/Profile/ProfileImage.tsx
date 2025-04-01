@@ -2,12 +2,14 @@ interface ProfileImageProps {
     userName: string;
     onClick?: () => void;
     className?: string;
+    size?: number;
 }
 
 export const ProfileImage: React.FC<ProfileImageProps> = ({
     userName,
     onClick,
     className = "",
+    size = 40
 }) => {
     const generateColor = (name: string) => {
         let hash = 0;
@@ -25,9 +27,12 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({
 
     return (
         <div
-            className={`w-10 h-10 flex items-center justify-center rounded-full ${getPointer()} ${className}`}
+            className={`flex items-center justify-center rounded-full select-none ${getPointer()} ${className}`}
             style={{
-                backgroundColor: generateColor(userName)
+                backgroundColor: generateColor(userName),
+                width: `${size}px`,
+                height: `${size}px`,
+                fontSize: `${size * 0.4}px`
             }}
             onClick={() => {
                 if(onClick) onClick()

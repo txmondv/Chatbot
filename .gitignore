@@ -3,12 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-data/
-logs/
-config/
-**/data/
-**/logs/
-**/config/
+/data/
+/logs/
+/config/
 
 ### STS ###
 .apt_generated

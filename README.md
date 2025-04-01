@@ -16,7 +16,9 @@ Das Backend basiert auf **Spring Boot** und bietet eine robuste REST API zur Ver
 
 - **Spring Boot** – Hauptframework für das Backend.
 - **Spring Web** – Erstellung der REST API.
+- **Spring Security & JWT** – API-Sicherheit und Authentifizierung.
 - **Spring Data JPA** – Datenpersistenz und ORM (Object-Relational Mapping).
+- **Spring Shell** – Bereitstellung einer Kommandozeilen-Schnittstelle.
 - **H2 oder PostgreSQL** – Datenbank für die Speicherung von Daten.
 - **Flyway** – Verwaltung und Durchführung von Datenbankmigrationen.
 

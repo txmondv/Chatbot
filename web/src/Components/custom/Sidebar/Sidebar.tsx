@@ -5,29 +5,36 @@ import { useNavigate } from "react-router";
 import logo from "../../../assets/sidebar-icon.png";
 import { getStorageValue, setStorageValue } from "../../../storage/StorageProvider.ts";
 import { SidebarItem } from "./SidebarItem.tsx";
- 
+import { useGetUserRoles } from "../../../hooks/Profile.hooks.ts";
+import { BiUser } from "react-icons/bi";
+
 interface SidebarProps {
     handleSidebarLock: (expanded: boolean) => void;
 }
- 
 
-const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
+
+const Sidebar: React.FC<SidebarProps> = ({ handleSidebarLock }) => {
     const navigate = useNavigate();
-    
-    const getStorageLock = (): boolean => getStorageValue("sidebarLocked") as boolean;   
+
+    const getStorageLock = (): boolean => getStorageValue("sidebarLocked") as boolean;
     const setStorageLock = (lock: boolean) => setStorageValue("sidebarLocked", lock);
- 
+
     const [isLocked, setIsLocked] = useState(getStorageLock());
     const [isHovered, setIsHovered] = useState(false);
- 
+
+    const { data: roles, isLoading: isRolesLoading } = useGetUserRoles();
+
     const expanded = isLocked || isHovered;
- 
+
     useEffect(() => {
-        if(getStorageLock() != isLocked) setStorageLock(isLocked);
+        if (getStorageLock() != isLocked) setStorageLock(isLocked);
         handleSidebarLock(isLocked);
     }, [handleSidebarLock, isLocked]);
 
- 
+    const isLoading = isRolesLoading;
+
+    if (isLoading) return <></>;
+
     return (
         <div
             className={`
@@ -39,7 +46,6 @@ const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Sidebar Header */}
             <div className="flex items-center justify-between px-4 py-3">
                 <img
                     src={logo}
@@ -52,11 +58,10 @@ const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
                     className={`p-2 rounded-lg bg-gray-50 hover:bg-gray-100 dark:bg-zinc-800 dark:text-gray-400 dark:hover:text-white dark:hover:bg-zinc-700`}
                     data-testid={"lock-sidebar"}
                 >
-                    {isLocked ? <BsChevronBarLeft/> : <BsChevronBarRight/>}
+                    {isLocked ? <BsChevronBarLeft /> : <BsChevronBarRight />}
                 </button>
             </div>
- 
-            {/* Sidebar Content */}
+
             <nav className={`
                 flex flex-col mt-2 pb-12 px-3 overflow-y-auto h-[calc(100%-3rem)]
                 ${!expanded && "overflow-x-hidden"}
@@ -69,6 +74,16 @@ const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
                     onClick={"/"}
                     expanded={expanded}
                 />
+                {roles?.includes("MANAGER") && (
+                    <SidebarItem
+                        icon={<BiUser />}
+                        title={"Management"}
+                        active={false}
+                        alert={false}
+                        onClick={"/users/"}
+                        expanded={expanded}
+                    />
+                )}
                 <SidebarItem
                     icon={<BsChat />}
                     title={"Chats"}
@@ -82,5 +97,5 @@ const Sidebar: React.FC<SidebarProps> = ({handleSidebarLock}) => {
     )
         ;
 };
- 
+
 export default Sidebar;

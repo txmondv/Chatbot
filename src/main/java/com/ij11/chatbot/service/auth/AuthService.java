@@ -1,6 +1,7 @@
 package com.ij11.chatbot.service.auth;
 
-import com.ij11.chatbot.models.User;
+import com.ij11.chatbot.models.users.User;
+import com.ij11.chatbot.models.users.UserRole;
 import com.ij11.chatbot.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseCookie;
@@ -11,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.time.Duration;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class AuthService implements UserDetailsService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
+        user.setRoles(Collections.singleton(UserRole.USER));
         return Optional.of(userRepository.save(user));
     }
 
@@ -40,6 +44,12 @@ public class AuthService implements UserDetailsService {
                 .build();
     }
 
+    public Set<UserRole> getRoles(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user.getRoles();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
@@ -49,4 +59,5 @@ public class AuthService implements UserDetailsService {
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
 }

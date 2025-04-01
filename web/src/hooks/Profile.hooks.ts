@@ -1,10 +1,26 @@
 import { useQuery } from "react-query";
-import { getUsername } from "../service/User.service";
+import { getAllUsers, getUsername, getUserRoles } from "../service/User.service";
+import { User } from "../types/User.types";
 
 export const useGetUsername = () => {
     return useQuery<string>({
         queryKey: "getUserName",
         queryFn: getUsername,
         initialData: "Loading..."
+    });
+};
+
+export const useGetUserRoles = () => {
+    return useQuery<string[]>({
+        queryKey: "userRoles",
+        queryFn: getUserRoles
+    });
+};
+
+export const useGetAllUsers = (enabled = true) => {
+    return useQuery<User[]>({
+        queryKey: "allUsers",
+        queryFn: getAllUsers,
+        enabled: enabled
     });
 };

@@ -1,5 +1,5 @@
 import { Chat, ChatMessage } from "../types/Chat.types";
-import { FetchWrapper } from "./FetchWrapper";
+import { FetchWrapper } from "../utils/FetchWrapper";
 
 export const getChats = async (): Promise<Chat[]> => 
     FetchWrapper.get<Chat[]>("/api/chats");

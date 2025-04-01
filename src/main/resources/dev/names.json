@@ -1,0 +1,26 @@
+{
+  "adjectives": [
+    "Shining", "Brave", "Quiet", "Vibrant", "Mysterious", "Creative", "Honest", "Clever", "Gentle", "Wild",
+    "Joyful", "Sad", "Fast", "Slow", "Strong", "Weak", "New", "Old", "Beautiful", "Ugly",
+    "Large", "Small", "Tall", "Short", "Wide", "Narrow", "Deep", "Shallow", "Bright", "Dark",
+    "Warm", "Cold", "Sweet", "Sour", "Bitter", "Salty", "Soft", "Hard", "Loud", "Quiet",
+    "Full", "Empty", "Clean", "Dirty", "Dry", "Wet", "Rich", "Poor", "Young", "Old",
+    "Modern", "Classic", "Flexible", "Rigid", "Simple", "Complex", "Clear", "Vague", "Open", "Closed",
+    "Positive", "Negative", "Active", "Passive", "Natural", "Artificial", "Public", "Private", "Local", "Global",
+    "Virtual", "Real", "Dynamic", "Static", "Central", "Peripheral", "Direct", "Indirect", "Formal", "Informal",
+    "Radical", "Conservative", "Progressive", "Regressive", "Temporary", "Permanent", "Special", "General", "Exclusive", "Inclusive",
+    "Optimal", "Suboptimal", "Minimal", "Maximal", "Efficient", "Inefficient", "Transparent", "Opaque", "Synchronous", "Asynchronous"
+  ],
+  "nouns": [
+    "Tree", "River", "Mountain", "City", "House", "Car", "Book", "Song", "Star", "Moon",
+    "Sun", "Wind", "Rain", "Fire", "Water", "Earth", "Sky", "Cloud", "Bird", "Fish",
+    "Dog", "Cat", "Mouse", "Horse", "Lion", "Tiger", "Monkey", "Snake", "Bee", "Ant",
+    "Flower", "Fruit", "Vegetable", "Bread", "Cheese", "Wine", "Beer", "Coffee", "Tea", "Juice",
+    "Game", "Film", "Music", "Art", "Idea", "Dream", "Goal", "Plan", "Path", "Time",
+    "Love", "Hate", "Joy", "Sorrow", "Fear", "Courage", "Hope", "Faith", "Knowledge", "Power",
+    "Peace", "War", "Life", "Death", "Mind", "Soul", "Heart", "Hand", "Foot", "Eye",
+    "Ear", "Nose", "Mouth", "Head", "Arm", "Leg", "Back", "Stomach", "Chest", "Shoulder",
+    "Finger", "Toe", "Neck", "Face", "Hair", "Skin", "Bone", "Muscle", "Nerve", "Blood",
+    "Cell", "Atom", "Molecule", "Planet", "Galaxy", "Universe", "Computer", "Phone", "Internet", "Network"
+  ]
+}

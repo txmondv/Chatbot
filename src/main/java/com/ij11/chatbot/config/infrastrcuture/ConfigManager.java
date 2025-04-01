@@ -1,7 +1,7 @@
 package com.ij11.chatbot.config.infrastrcuture;
 
-import com.ij11.chatbot.config.infrastrcuture.annotations.ConfigFile;
-import com.ij11.chatbot.config.infrastrcuture.annotations.ConfigProperty;
+import com.ij11.chatbot.config.annotations.ConfigFile;
+import com.ij11.chatbot.config.annotations.ConfigProperty;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;

@@ -1,9 +1,8 @@
 package com.ij11.chatbot.service.chat;
 
-import com.ij11.chatbot.Chatbot;
 import com.ij11.chatbot.config.ChatbotUserConfig;
-import com.ij11.chatbot.models.ChatMessage;
-import com.ij11.chatbot.models.ChatMessageOrigin;
+import com.ij11.chatbot.models.chat.ChatMessage;
+import com.ij11.chatbot.models.chat.ChatMessageOrigin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;

@@ -20,21 +20,20 @@ export default function RegisterPage() {
       const registerResponse = await register(username, password);
       if (!registerResponse.success) {
         setErrorMessage(registerResponse.message);
-      } else {
-        const loginResponse = await login(username, password);
-        if (loginResponse) {
-          setErrorMessage(loginResponse);
-        } else {
-          setErrorMessage(null);
-          navigate("/");
-        }
+        return;
       }
+
+      const loginResponse = await login(username, password);
+      if (loginResponse) {
+        setErrorMessage(loginResponse);
+        return;
+      }
+
+      setErrorMessage(null);
+      navigate("/");
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        alert(error.message);
-      } else {
-        alert("An unexpected error occurred");
-      }
+      if (error instanceof Error) alert(error.message)
+      else alert("An unexpected error occurred");
     }
   }
 
@@ -75,7 +74,7 @@ export default function RegisterPage() {
               className="absolute top-1/2 right-4 transform -translate-y-1/2 text-cyan-400 cursor-pointer"
               id="password-tooltip"
             />
-            <Tooltip place="top"/>
+            <Tooltip place="top" />
             <Tooltip anchorSelect="#password-tooltip" place="top">
               Gib dein Passwort ein.
             </Tooltip>

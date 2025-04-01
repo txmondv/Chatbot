@@ -1,4 +1,4 @@
-package com.ij11.chatbot.models;
+package com.ij11.chatbot.models.chat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

@@ -1,5 +1,6 @@
-package com.ij11.chatbot.models;
+package com.ij11.chatbot.models.chat;
 
+import com.ij11.chatbot.models.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;

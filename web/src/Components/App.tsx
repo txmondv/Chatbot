@@ -10,8 +10,10 @@ import ChatsOverviewPage from "./pages/ChatsOverviewPage";
 import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundPage from "./pages/lib/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
+import UserManagementPage from "./pages/UserManagementPage";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { authenticated: isAuthenticated, loading } = useAuth();
@@ -24,7 +26,7 @@ export default function App() {
   const [sidebarLocked, setSidebarLocked] = useState<boolean>(getStorageValue("sidebarLocked") as boolean);
 
   return (
-    <Router> {/* Move Router here to wrap everything */}
+    <Router>
       <AuthProvider>
       <div className="flex min-h-screen max-w-screen bg-zinc-900 text-white">
         <Routes>
@@ -42,6 +44,8 @@ export default function App() {
                     <div className="flex-1 overflow-auto mt-16">
                       <Routes>
                         <Route path="/" element={<DashboardPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/users" element={<UserManagementPage />} />
                         <Route path="/chats" element={<ChatsOverviewPage />} />
                         <Route path="/chats/:chatId" element={<ChatPage />} />
                         <Route path="*" element={<NotFoundPage />} />

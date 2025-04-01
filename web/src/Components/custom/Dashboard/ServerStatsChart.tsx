@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { getHardwareStats } from "../../../service/System.service";
 import NoAPIResponseCard from "../../lib/cards/NoAPIResponseCard";
 import SimpleCard from "../../lib/cards/SimpleCard";
-import { getHardwareStats } from "../../../service/System.service";
 
 interface HardwareStatsHistory {
     time: string;

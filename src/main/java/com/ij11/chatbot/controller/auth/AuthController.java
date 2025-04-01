@@ -1,11 +1,8 @@
 package com.ij11.chatbot.controller.auth;
 
 import com.ij11.chatbot.config.security.jwt.JwtUtil;
-import com.ij11.chatbot.dto.auth.AuthRequest;
-import com.ij11.chatbot.dto.auth.AuthResponse;
-import com.ij11.chatbot.dto.auth.RegisterRequest;
-import com.ij11.chatbot.dto.auth.RegisterResponse;
-import com.ij11.chatbot.models.User;
+import com.ij11.chatbot.dto.auth.*;
+import com.ij11.chatbot.models.users.User;
 import com.ij11.chatbot.service.auth.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,7 +48,7 @@ public class AuthController {
         return new AuthResponse(true, accessToken);
     }
 
-    @PostMapping("/refresh")
+    @GetMapping("/refresh")
     public AuthResponse refresh(HttpServletRequest request) {
         String refreshToken = jwtUtil.extractTokenFromCookie(request, "refresh_token");
 

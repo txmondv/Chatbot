@@ -1,7 +1,7 @@
 package com.ij11.chatbot.repositories;
 
-import com.ij11.chatbot.models.Chat;
-import com.ij11.chatbot.models.User;
+import com.ij11.chatbot.models.chat.Chat;
+import com.ij11.chatbot.models.users.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

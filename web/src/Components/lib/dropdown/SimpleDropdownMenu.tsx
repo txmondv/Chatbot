@@ -11,11 +11,19 @@ interface SimpleDropdownMenuProps {
     options: SimpleDropdownMenuOption[];
     className?: string;
     buttonClassName?: string;
+    icon?: ReactNode;
 }
 
-const SimpleDropdownMenu: React.FC<SimpleDropdownMenuProps> = ({ options, className = "", buttonClassName = "" }) => {
+const SimpleDropdownMenu: React.FC<SimpleDropdownMenuProps> = ({
+    options,
+    className = "",
+    buttonClassName = "",
+    icon = <div className="px-2 py-3"><SlOptionsVertical /></div>,
+}) => {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -24,8 +32,21 @@ const SimpleDropdownMenu: React.FC<SimpleDropdownMenuProps> = ({ options, classN
             }
         };
 
-        if (open) document.addEventListener("mousedown", handleClickOutside);
+        if (open) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
         return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [open]);
+
+    useEffect(() => {
+        if (open && buttonRef.current) {
+            const rect = buttonRef.current.getBoundingClientRect();
+            setPosition({
+                top: rect.bottom + window.scrollY + 4, // 4px Abstand zum Button
+                left: rect.right + window.scrollX - 4, // rechts vom button
+            });
+        }
     }, [open]);
 
     function close() {
@@ -35,14 +56,18 @@ const SimpleDropdownMenu: React.FC<SimpleDropdownMenuProps> = ({ options, classN
     return (
         <div className={`relative ${className}`} ref={dropdownRef}>
             <button
+                ref={buttonRef}
                 onClick={() => setOpen(!open)}
-                className={`px-2 py-3 rounded-md transition-colors duration-200 ${buttonClassName}`}
+                className={`rounded-md transition-colors duration-200 ${buttonClassName}`}
             >
-                <SlOptionsVertical />
+                {icon}
             </button>
 
             {open && (
-                <div className="absolute right-0 mt-2 w-fit text-white bg-zinc-800 rounded-md shadow-md">
+                <div
+                    className="fixed z-[100] mt-1 w-fit text-white bg-zinc-800 rounded-md shadow-md ml-[-12px]"
+                    style={{ top: position.top, left: position.left }}
+                >
                     {options.map((option, index) => {
                         return (
                             <button
@@ -57,7 +82,7 @@ const SimpleDropdownMenu: React.FC<SimpleDropdownMenuProps> = ({ options, classN
                                     {option?.icon && <span className="mr-3">{option.icon}</span>} <span className="whitespace-nowrap">{option.title}</span>
                                 </div>
                             </button>
-                        )
+                        );
                     })}
                 </div>
             )}

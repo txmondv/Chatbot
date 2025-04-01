@@ -2,8 +2,8 @@ package com.ij11.chatbot.config;
 
 import com.ij11.chatbot.config.infrastrcuture.ConfigEntry;
 import com.ij11.chatbot.config.infrastrcuture.ConfigManager;
-import com.ij11.chatbot.config.infrastrcuture.annotations.ConfigFile;
-import com.ij11.chatbot.config.infrastrcuture.annotations.ConfigProperty;
+import com.ij11.chatbot.config.annotations.ConfigFile;
+import com.ij11.chatbot.config.annotations.ConfigProperty;
 
 @ConfigFile("chatbot.properties")
 public class ChatbotUserConfig {
@@ -28,13 +28,13 @@ public class ChatbotUserConfig {
             new ConfigEntry<>(
                     Integer.class,
                     11434,
-                    "Your Ollama port. Default is 11434.") {};
+                    "Your Ollama port. (Default: 11434).") {};
 
     @ConfigProperty("ollama.prompt.maxtokens")
     public static final ConfigEntry<Integer> OLLAMA_MAX_TOKENS =
             new ConfigEntry<>(
                     Integer.class,
-                    500,
+                    -1,
                     "Maximum amount of tokens for a response. Set to -1 for infinite.") {};
 
     @ConfigProperty("ollama.prompt.temperature")
@@ -55,8 +55,8 @@ public class ChatbotUserConfig {
     public static final ConfigEntry<Double> OLLAMA_TOP_P =
             new ConfigEntry<>(
                     Double.class,
-                    0.9,
-                    "A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text. (Default: 0.9)") {};
+                    0.7,
+                    "A higher value (e.g., 0.95) will lead to more diverse text, while a lower value (e.g., 0.5) will generate more focused and conservative text.") {};
 
 
 

@@ -1,5 +1,5 @@
 import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "../types/Auth.types";
-import { FetchWrapper } from "./FetchWrapper";
+import { FetchWrapper } from "../utils/FetchWrapper";
 
 export const isAuthenticated = async (): Promise<boolean> => FetchWrapper.get<boolean>("/api/auth/isAuthenticated");
 

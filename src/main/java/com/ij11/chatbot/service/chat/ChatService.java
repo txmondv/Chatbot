@@ -1,8 +1,8 @@
 package com.ij11.chatbot.service.chat;
 
-import com.ij11.chatbot.models.Chat;
-import com.ij11.chatbot.models.ChatMessage;
-import com.ij11.chatbot.models.User;
+import com.ij11.chatbot.models.chat.Chat;
+import com.ij11.chatbot.models.chat.ChatMessage;
+import com.ij11.chatbot.models.users.User;
 import com.ij11.chatbot.repositories.ChatMessageRepository;
 import com.ij11.chatbot.repositories.ChatRepository;
 import lombok.RequiredArgsConstructor;

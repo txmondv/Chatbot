@@ -1,19 +1,17 @@
 package com.ij11.chatbot.service.chat;
 
 import com.ij11.chatbot.dto.chat.ChatInfo;
-import com.ij11.chatbot.models.Chat;
-import com.ij11.chatbot.models.ChatMessage;
-import com.ij11.chatbot.models.ChatMessageOrigin;
-import com.ij11.chatbot.models.User;
+import com.ij11.chatbot.models.chat.Chat;
+import com.ij11.chatbot.models.chat.ChatMessage;
+import com.ij11.chatbot.models.chat.ChatMessageOrigin;
+import com.ij11.chatbot.models.users.User;
 import com.ij11.chatbot.repositories.ChatMessageRepository;
 import com.ij11.chatbot.repositories.ChatRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
