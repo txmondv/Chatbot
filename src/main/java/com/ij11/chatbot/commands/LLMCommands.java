@@ -1,14 +1,17 @@
 package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.config.commands.CommandManager;
+import com.ij11.chatbot.core.commands.CommandManager;
 import com.ij11.chatbot.config.ChatbotUserConfig;
-import com.ij11.chatbot.dto.ollama.OllamaModel;
+import com.ij11.chatbot.api.dto.ollama.OllamaModel;
 import com.ij11.chatbot.service.chat.OllamaInfoService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 import java.util.Optional;
+
+import static com.ij11.chatbot.config.ChatbotUserConfig.OLLAMA_ADDRESS;
+import static com.ij11.chatbot.config.ChatbotUserConfig.OLLAMA_PORT;
 
 @AllArgsConstructor
 @ShellComponent
@@ -17,7 +20,7 @@ public class LLMCommands {
 
     @ShellMethod("Checks if Ollama is running")
     public void ollamaCheck() {
-        String ollamaLocation = ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort();
+        String ollamaLocation = OLLAMA_ADDRESS.get() + ":" + OLLAMA_PORT.get();
         if (ollamaInfoService.isOllamaRunning()) CommandManager.logCommandResult("LLM", "Ollama is running at " + ollamaLocation);
         else CommandManager.logCommandResult("LLM", "Ollama is not reachable at " + ollamaLocation);
     }

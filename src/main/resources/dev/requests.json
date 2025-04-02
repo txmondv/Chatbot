@@ -1,0 +1,302 @@
+[
+  {
+    "subject": "Hilfe beim Zurücksetzen meines Passworts",
+    "content": "Hallo IT-Team,\n\nich habe mein Passwort vergessen und kann mich nicht mehr in mein Benutzerkonto einloggen.\nKönnten Sie mir bitte beim Zurücksetzen meines Passworts helfen?\nVielen Dank im Voraus.",
+    "username": "Jens Müller",
+    "timestamp": "04.06. 09:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Einrichtung meines E-Mail-Kontos",
+    "content": "Liebe IT-Abteilung,\n\nich bin neu im Unternehmen und benötige Hilfe bei der Einrichtung meines E-Mail-Kontos.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Anna Schmidt",
+    "timestamp": "04.06. 10:30 Uhr"
+  },
+  {
+    "subject": "Probleme beim Zugriff auf den Netzwerkdrucker",
+    "content": "Sehr geehrtes IT-Team,\n\nich habe Schwierigkeiten, auf den Netzwerkdrucker zuzugreifen.\nKönnten Sie mir bitte dabei helfen, das Problem zu lösen?\n\nVielen Dank.",
+    "username": "Markus Weber",
+    "timestamp": "04.06. 11:45 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Installation einer Software",
+    "content": "Hallo zusammen,\n\nich benötige Hilfe bei der Installation einer Standardsoftware auf meinem Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Laura Fischer",
+    "timestamp": "04.06. 13:00 Uhr"
+  },
+  {
+    "subject": "Probleme mit der Internetverbindung",
+    "content": "Hi IT-Team,\n\nich habe Probleme mit meiner Internetverbindung.\nKönnten Sie mir bitte dabei helfen, das Problem zu beheben?\n\nVielen Dank.",
+    "username": "Thomas Becker",
+    "timestamp": "04.06. 14:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Einrichtung einer VPN-Verbindung",
+    "content": "Hallo IT-Support,\n\nich benötige Hilfe bei der Einrichtung einer VPN-Verbindung, um von zu Hause aus arbeiten zu können.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Julia Schneider",
+    "timestamp": "04.06. 15:30 Uhr"
+  },
+  {
+    "subject": "Probleme mit der Bildschirmauflösung",
+    "content": "Sehr geehrtes IT-Team,\n\nich habe Probleme mit der Bildschirmauflösung meines Monitors.\nKönnten Sie mir bitte dabei helfen, die richtige Auflösung einzustellen?\n\nVielen Dank.",
+    "username": "Michael Wagner",
+    "timestamp": "04.06. 16:45 Uhr"
+  },
+  {
+    "subject": "Probleme mit der E-Mail-Synchronisation",
+    "content": "Hallo IT-Abteilung,\n\nich habe Schwierigkeiten, meine E-Mails auf verschiedenen Geräten zu synchronisieren.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Sarah Meyer",
+    "timestamp": "05.06. 09:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Datensicherung",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe bei der Sicherung meiner Daten. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Peter Schulz",
+    "timestamp": "05.06. 10:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung beim Update einer Software",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe beim Update einer Software auf meinem Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Maria Hoffmann",
+    "timestamp": "05.06. 11:30 Uhr"
+  },
+  {
+    "subject": "Probleme mit der Druckerwarteschlange",
+    "content": "Sehr geehrtes IT-Team,\n\nein Druckauftrag hängt in der Warteschlange fest und ich kann nicht drucken.\nKönnten Sie mir bitte dabei helfen, das Problem zu lösen?\n\nVielen Dank.",
+    "username": "Andreas Schäfer",
+    "timestamp": "05.06. 12:45 Uhr"
+  },
+  {
+    "subject": "Probleme mit Maus/Tastatur",
+    "content": "Hallo IT-Support,\n\nmeine Maus oder Tastatur funktioniert nicht richtig. Könnten Sie mir bitte dabei helfen, das Problem zu beheben?\n\nVielen Dank.",
+    "username": "Lisa Bauer",
+    "timestamp": "05.06. 14:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung beim Verbinden eines Netzlaufwerks",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe beim Verbinden eines Netzlaufwerks.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Frank Koch",
+    "timestamp": "05.06., 15:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Einrichtung meiner E-Mail-Signatur",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Einrichtung meiner E-Mail-Signatur.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Sandra Richter",
+    "timestamp": "05.06., 16:30 Uhr"
+  },
+  {
+    "subject": "Probleme mit flackerndem Bildschirm",
+    "content": "Sehr geehrtes IT-Team,\n\nmein Bildschirm flackert und ich benötige Hilfe, um das Problem zu beheben.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Stefan Klein",
+    "timestamp": "06.06. 09:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Deinstallation einer Software",
+    "content": "Hallo IT-Support,\n\nich benötige Hilfe bei der Deinstallation einer Software auf meinem Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Claudia Wolf",
+    "timestamp": "06.06., 10:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Durchführung eines Antivirus-Scans",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe bei der Durchführung eines Antivirus-Scans auf meinem Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Patrick Neumann",
+    "timestamp": "06.06. 11:30 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Installation eines Druckertreibers",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Installation eines Druckertreibers für meinen Netzwerkdrucker.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Melanie Schwarz",
+    "timestamp": "06.06., 12:45 Uhr"
+  },
+  {
+    "subject": "Probleme mit Lautsprechern",
+    "content": "Hallo IT-Support,\n\nmeine Lautsprecher funktionieren nicht richtig.\nKönnten Sie mir bitte dabei helfen, das Problem zu beheben?\n\nVielen Dank.",
+    "username": "Oliver Zimmermann",
+    "timestamp": "06.06., 14:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Anpassung der Webbrowser-Einstellungen",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe bei der Anpassung meiner Webbrowser-Einstellungen.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Christina Krüger",
+    "timestamp": "06.06. 15:15 Uhr"
+  },
+  {
+    "subject": "Netzwerkdrucker hinzufügen und konfigurieren",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe beim Hinzufügen und Konfigurieren eines Netzwerkdruckers. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Christian Hofmann",
+    "timestamp": "06.06. 16:30 Uhr"
+  },
+  {
+    "subject": "Verwaltung von Benutzerrechten",
+    "content": "Sehr geehrtes IT-Team,\n\nich benötige spezielle Benutzerrechte für eine Anwendung.\nKönnten Sie mir bitte dabei helfen, diese Rechte zu erhalten?\n\nVielen Dank.",
+    "username": "Daniela Hartmann",
+    "timestamp": "07.06. 09:00 Uhr"
+  },
+  {
+    "subject": "Lösung von Softwarekonflikten",
+    "content": "Hallo IT-Support,\n\nich habe Probleme mit Konflikten zwischen zwei installierten Programmen.\nKönnten Sie mir bitte dabei helfen, diese Konflikte zu lösen?\n\nVielen Dank.",
+    "username": "Alexander Lorenz",
+    "timestamp": "07.06. 10:15 Uhr"
+  },
+  {
+    "subject": "Wiederkehrende Netzwerkverbindungsprobleme",
+    "content": "Hi IT-Team,\n\nich habe wiederkehrende Probleme mit meiner Netzwerkverbindung. Könnten Sie mir bitte dabei helfen, diese Probleme zu beheben?\n\nVielen Dank.",
+    "username": "Katharina Lange",
+    "timestamp": "07.06. 11:30 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Einrichtung einer Remote-Desktop-Verbindung",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Einrichtung einer Remote-Desktop-Verbindung.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Benjamin Simon",
+    "timestamp": "07.06. 12:45 Uhr"
+  },
+  {
+    "subject": "Probleme mit Outlook-Profil",
+    "content": "Sehr geehrtes IT-Team,\n\nich habe Probleme mit meinem Outlook-Profil und benötige eine Reparatur. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Johanna Walter",
+    "timestamp": "07.06. 14:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Datenwiederherstellung",
+    "content": "Hallo IT-Support,\n\nich habe versehentlich Daten gelöscht und benötige Hilfe bei der Wiederherstellung.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Tobias Frank",
+    "timestamp": "07.06. 15:15 Uhr"
+  },
+  {
+    "subject": "Verwaltung der Netzwerkdruckerwarteschlange",
+    "content": "Hi IT-Team,\n\nich habe Probleme mit der Netzwerkdruckerwarteschlange. Könnten Sie mir bitte dabei helfen, diese zu verwalten?\n\nVielen Dank.",
+    "username": "Nadine Böhm",
+    "timestamp": "07.06. 16:30 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der E-Mail-Archivierung",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Archivierung meiner E-Mails.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Florian Berger",
+    "timestamp": "07.06. 17:45 Uhr"
+  },
+  {
+    "subject": "Konfiguration der Sicherheitssoftware",
+    "content": "Sehr geehrtes IT-Team,\n\nich benötige Hilfe bei der Konfiguration meiner Sicherheitssoftware. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Sabrina Roth",
+    "timestamp": "07.06., 18:00 Uhr"
+  },
+  {
+    "subject": "Probleme beim Netzwerkzugriff",
+    "content": "Hallo IT-Support,\n\nich habe Probleme beim Zugriff auf eine bestimmte Netzwerkressource.\nKönnten Sie mir bitte dabei helfen, das Problem zu lösen?\n\nVielen Dank.",
+    "username": "Dennis Fuchs",
+    "timestamp": "07.06. 18:15 Uhr"
+  },
+  {
+    "subject": "Aktivierung einer Softwarelizenz",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe bei der Aktivierung einer Softwarelizenz. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Melanie Arnold",
+    "timestamp": "07.06. 18:30 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Datenmigration",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Migration meiner Daten auf einen neuen Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Markus Busch",
+    "timestamp": "07.06. 18:45 Uhr"
+  },
+  {
+    "subject": "Wartung eines Netzwerkdruckers",
+    "content": "Sehr geehrtes IT-Team,\n\nunser Netzwerkdrucker benötigt Wartung und Reinigung. Könnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Claudia Pfeiffer",
+    "timestamp": "07.06., 19:00 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Einrichtung von E-Mail-Filtern",
+    "content": "Hallo IT-Support,\n\nich benötige Hilfe bei der Einrichtung von E-Mail-Filtern.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Felix Wolf",
+    "timestamp": "07.06., 19:15 Uhr"
+  },
+  {
+    "subject": "Probleme mit langsamer Netzwerkgeschwindigkeit",
+    "content": "Hi IT-Team,\n\nich habe Probleme mit langsamer Netzwerkgeschwindigkeit. Könnten Sie mir bitte dabei helfen, das Problem zu beheben?\n\nVielen Dank.",
+    "username": "Christina König",
+    "timestamp": "07.06., 19:30 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Konfiguration der Firewall-Einstellungen",
+    "content": "Liebe IT-Abteilung,\n\nich benötige Hilfe bei der Konfiguration der Firewall-Einstellungen.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Michael Schröder",
+    "timestamp": "07.06. 19:45 Uhr"
+  },
+  {
+    "subject": "Probleme mit der Softwarekompatibilität",
+    "content": "Sehr geehrtes IT-Team,\n\nich habe Probleme mit der Kompatibilität einer Software auf meinem System.\nKönnten Sie mir bitte dabei helfen, das Problem zu lösen?\n\nVielen Dank.",
+    "username": "Laura Braun",
+    "timestamp": "07.06. 20:00 Uhr"
+  },
+  {
+    "subject": "Probleme mit Windows-Benutzerprofil",
+    "content": "Hallo IT-Support,\n\nich habe Probleme mit meinem Windows-Benutzerprofil. Könnten Sie mir bitte dabei helfen, das Problem zu beheben?\n\nVielen Dank.",
+    "username": "Peter Weiß",
+    "timestamp": "07.06. 20:15 Uhr"
+  },
+  {
+    "subject": "Unterstützung bei der Durchführung von Sicherheitsupdates",
+    "content": "Hi IT-Team,\n\nich benötige Hilfe bei der Durchführung von Sicherheitsupdates auf meinem Computer.\nKönnten Sie mir bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Anna Jung",
+    "timestamp": "07.06. 20:30 Uhr"
+  },
+  {
+    "subject": "Dringend: Serverausfall",
+    "content": "Sehr geehrtes IT-Team,\n\nein wichtiger Unternehmensserver ist ausgefallen und muss schnellstmöglich wiederhergestellt werden. Könnten Sie bitte sofort Unterstützung leisten?\n\nVielen Dank.",
+    "username": "Thomas Becker",
+    "timestamp": "04.06. 09:00 Uhr"
+  },
+  {
+    "subject": "Implementierung einer Netzwerksegmentierung",
+    "content": "Hallo IT-Support,\n\nwir benötigen Unterstützung bei der Implementierung einer komplexen Netzwerksegmentierung.\nKönnten Sie uns bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Julia Schneider",
+    "timestamp": "04.06. 10:30 Uhr"
+  },
+  {
+    "subject": "Optimierung und Performance-Tuning einer Datenbank",
+    "content": "Hi IT-Team,\n\nunsere Unternehmensdatenbank benötigt Optimierung und Performance-Tuning. Könnten Sie uns bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Michael Wagner",
+    "timestamp": "04.06. 12:00 Uhr"
+  },
+  {
+    "subject": "Durchführung einer Netzwerksicherheitsanalyse",
+    "content": "Liebe IT-Abteilung,\n\nwir benötigen eine umfassende Netzwerksicherheitsanalyse. Könnten Sie uns bitte dabei unterstützen?\n\nVielen Dank.",
+    "username": "Sarah Meyer",
+    "timestamp": "04.06. 13:30 Uhr"
+  },
+  {
+    "subject": "Aufsetzen und Konfigurieren eines virtuellen Servers",
+    "content": "Sehr geehrtes IT-Team,\n\nwir benötigen Unterstützung beim Aufsetzen und Konfigurieren eines neuen virtuellen Servers.\nKönnten Sie uns bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Peter Schulz",
+    "timestamp": "04.06. 15:00 Uhr"
+  },
+  {
+    "subject": "Erweiterte Datenwiederherstellung erforderlich",
+    "content": "Hallo IT-Support,\n\nnach einem schweren Datenverlust benötigen wir erweiterte Datenwiederherstellungsmaßnahmen. Könnten Sie uns bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Maria Hoffmann",
+    "timestamp": "04.06. 16:30 Uhr"
+  },
+  {
+    "subject": "Performance-Optimierung einer Unternehmensanwendung",
+    "content": "Hi IT-Team,\n\neine unserer Unternehmensanwendungen benötigt Performance-Optimierung und Fehlerbehebung. Könnten Sie uns bitte unterstützen?\n\nVielen Dank.",
+    "username": "Andreas Schäfer",
+    "timestamp": "05.06. 09:00 Uhr"
+  },
+  {
+    "subject": "Upgrade der Netzwerkinfrastruktur",
+    "content": "Liebe IT-Abteilung,\n\nwir benötigen ein umfassendes Upgrade unserer Netzwerkinfrastruktur.\nKönnten Sie uns bitte dabei helfen?\n\nVielen Dank.",
+    "username": "Lisa Bauer",
+    "timestamp": "05.06., 10:30 Uhr"
+  },
+  {
+    "subject": "Erstellung eines Compliance-Berichts",
+    "content": "Sehr geehrtes IT-Team,\r\nwir benötigen einen Compliance-Bericht für IT-Sicherheitsstandards. Könnten Sie uns \r\nbitte dabei unterstützen?\r\nVielen Dank.",
+    "username": "Frank Koch",
+    "timestamp": "05.06., 12:00 Uhr"
+  },
+  {
+    "subject": "Erweiterte Firewall-Konfiguration",
+    "content": "Hallo IT-Support,\r\nwir benötigen eine erweiterte Firewall-Konfiguration für unser komplexes Netzwerk.\r\nKönnten Sie uns bitte dabei helfen?\r\nVielen Dank.",
+    "username": "Sandra Richter",
+    "timestamp": "05.06., 13:30 Uhr"
+  }
+]

@@ -1,9 +1,9 @@
 package com.ij11.chatbot.service.users;
 
-import com.ij11.chatbot.config.security.jwt.JwtUtil;
-import com.ij11.chatbot.dto.users.UserDto;
-import com.ij11.chatbot.models.users.User;
-import com.ij11.chatbot.repositories.UserRepository;
+import com.ij11.chatbot.core.security.jwt.JwtUtil;
+import com.ij11.chatbot.api.dto.users.UserDto;
+import com.ij11.chatbot.domain.models.users.User;
+import com.ij11.chatbot.domain.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

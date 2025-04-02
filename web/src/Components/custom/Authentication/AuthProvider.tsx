@@ -14,7 +14,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-export function AuthProvider({ children }: {children: React.ReactNode}) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -33,10 +33,10 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
   async function login(username: string, password: string, redirect: boolean = true): Promise<string | null> {
     try {
       const data = await serviceLogin({ username, password });
-      if(data.error || !data.token) return data?.error ?? "Login fehlgeschlagen.";
-      Cookies.set("token", data.token, { secure: true, sameSite: "Strict" });
+      if (data.error || !data.token) return data?.error ?? "Login fehlgeschlagen.";
+      Cookies.set("accessToken", data.token, { secure: true, sameSite: "Strict" });   
       setAuthenticated(true);
-      if(redirect) navigate("/");
+      if (redirect) navigate("/");
       return null;
     } catch (e) {
       return "Unbekannter Fehler beim Login: " + e;
@@ -49,14 +49,15 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
     } catch (e) {
       return {
         success: false,
-        message: "Unbekannter Fehler beim Registrieren: " + e
-      }
+        message: "Unbekannter Fehler beim Registrieren: " + e,
+      };
     }
   }
 
-
   function logout() {
-    Cookies.remove("token");
+    Cookies.remove("refreshToken");
+    Cookies.remove("refresh_token");
+    Cookies.remove("accessToken");
     setAuthenticated(false);
     navigate("/login");
   }
@@ -83,8 +84,6 @@ export function AuthProvider({ children }: {children: React.ReactNode}) {
   );
 }
 
-/** ✅ Ensure useAuth always returns a non-null value */
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
   if (!context) {

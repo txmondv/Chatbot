@@ -2,8 +2,8 @@ package com.ij11.chatbot.service.chat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ij11.chatbot.config.ChatbotUserConfig;
-import com.ij11.chatbot.dto.ollama.OllamaModel;
-import com.ij11.chatbot.dto.ollama.OllamaResponse;
+import com.ij11.chatbot.api.dto.ollama.OllamaModel;
+import com.ij11.chatbot.api.dto.ollama.OllamaResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.ij11.chatbot.config.ChatbotUserConfig.OLLAMA_PORT;
+
 @Service
 @RequiredArgsConstructor
 public class OllamaInfoService {
+    private final static String OLLAMA_ADDRESS = ChatbotUserConfig.OLLAMA_ADDRESS.get() + ":" + OLLAMA_PORT.get();
 
     private static HttpURLConnection getHttpURLConnection(String endpoint) throws IOException {
-        URL url = new URL(ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort() + endpoint);
+        URL url = new URL(OLLAMA_ADDRESS + endpoint);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
@@ -54,7 +57,7 @@ public class OllamaInfoService {
 
     public boolean isOllamaRunning() {
         try {
-            URL url = new URL(ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort() + "/api/tags");
+            URL url = new URL(OLLAMA_ADDRESS + "/api/tags");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
             connection.disconnect();

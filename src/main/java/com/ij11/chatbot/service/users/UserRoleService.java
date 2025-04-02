@@ -1,8 +1,8 @@
 package com.ij11.chatbot.service.users;
 
-import com.ij11.chatbot.models.users.User;
-import com.ij11.chatbot.models.users.UserRole;
-import com.ij11.chatbot.repositories.UserRepository;
+import com.ij11.chatbot.domain.models.users.User;
+import com.ij11.chatbot.domain.models.users.UserRole;
+import com.ij11.chatbot.domain.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

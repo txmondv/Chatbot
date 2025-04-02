@@ -1,7 +1,7 @@
 package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.config.commands.CommandManager;
-import com.ij11.chatbot.models.users.UserRole;
+import com.ij11.chatbot.core.commands.CommandManager;
+import com.ij11.chatbot.domain.models.users.UserRole;
 import com.ij11.chatbot.service.users.UserInfoService;
 import com.ij11.chatbot.service.users.UserRoleService;
 import lombok.AllArgsConstructor;

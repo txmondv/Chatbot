@@ -1,8 +1,8 @@
 package com.ij11.chatbot.service.chat;
 
 import com.ij11.chatbot.config.ChatbotUserConfig;
-import com.ij11.chatbot.models.chat.ChatMessage;
-import com.ij11.chatbot.models.chat.ChatMessageOrigin;
+import com.ij11.chatbot.domain.models.chat.ChatMessage;
+import com.ij11.chatbot.domain.models.chat.ChatMessageOrigin;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class OllamaChatClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String OLLAMA_API_URL =
-            ChatbotUserConfig.getOllamaAddress() + ":" + ChatbotUserConfig.getOllamaPort() + "/api/chat";
+            ChatbotUserConfig.OLLAMA_ADDRESS.get() + ":" + ChatbotUserConfig.OLLAMA_PORT.get() + "/api/chat";
 
     public String generateTitle(String model, String userMessage) {
         return respond(getRequestBody(model, List.of(), userMessage, true));
@@ -59,10 +59,10 @@ public class OllamaChatClient {
 
     private static Map<String, Object> getOptions() {
         Map<String, Object> options = new HashMap<>();
-        options.put("num_predict", ChatbotUserConfig.getOllamaMaxTokens());
-        options.put("temperature", ChatbotUserConfig.getOllamaTemperature());
-        if(ChatbotUserConfig.getOllamaBePredictable()) options.put("seed", 42);
-        options.put("top_p", ChatbotUserConfig.getOllamaTopP());
+        options.put("num_predict", ChatbotUserConfig.OLLAMA_MAX_TOKENS.get());
+        options.put("temperature", ChatbotUserConfig.OLLAMA_TEMPERATURE.get());
+        if(ChatbotUserConfig.OLLAMA_PREDICTABLE.get()) options.put("seed", 42);
+        options.put("top_p", ChatbotUserConfig.OLLAMA_TOP_P.get());
         return options;
     }
 

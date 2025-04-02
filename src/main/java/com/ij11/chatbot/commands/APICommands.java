@@ -1,6 +1,6 @@
 package com.ij11.chatbot.commands;
 
-import com.ij11.chatbot.config.commands.CommandManager;
+import com.ij11.chatbot.core.commands.CommandManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.shell.standard.ShellComponent;
@@ -46,7 +46,7 @@ public class APICommands {
     @AllArgsConstructor
     @Getter
     private static class RouteInfo {
-        private static final int minLength = 9;
+        private static final int minLength = 10;
 
         private String method;
         private String path;

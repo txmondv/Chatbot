@@ -1,6 +1,6 @@
 package com.ij11.chatbot.service.system;
 
-import com.ij11.chatbot.dto.system.HardwareStats;
+import com.ij11.chatbot.api.dto.system.HardwareStats;
 import com.sun.management.OperatingSystemMXBean;
 import org.springframework.stereotype.Service;
 

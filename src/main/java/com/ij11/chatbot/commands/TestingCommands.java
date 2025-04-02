@@ -2,9 +2,9 @@ package com.ij11.chatbot.commands;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ij11.chatbot.config.commands.CommandManager;
+import com.ij11.chatbot.core.commands.CommandManager;
 import com.ij11.chatbot.service.auth.AuthService;
-import com.ij11.chatbot.models.users.User;
+import com.ij11.chatbot.domain.models.users.User;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.shell.standard.ShellComponent;
@@ -24,14 +24,14 @@ public class TestingCommands {
 
     @ShellMethod("Generates some users to populate the database")
     public void generateUsers(
-            @ShellOption(defaultValue = "10", help = "Amount of users to generate (Default: 10)") String amount,
-            @ShellOption(defaultValue = "hello", help = "Password for the user account (Default: hello)") String password
+            @ShellOption(defaultValue = "10", help = "Amount of users to generate") String amount,
+            @ShellOption(defaultValue = "hello", help = "Password for the user account") String password
     ) throws IOException {
         int usersAmount = Integer.parseInt(amount);
         Set<String> userNames = generateNames(usersAmount);
 
         AtomicInteger actualGenerations = new AtomicInteger();
-        userNames.forEach(name -> {;
+        userNames.forEach(name -> {
                 Optional<User> userOpt = authService.registerUser(name, password);
                 if(userOpt.isEmpty()) {
                     CommandManager.logCommandResult("Generator", "User with name \"" + name + "\" already exists.");
@@ -57,10 +57,6 @@ public class TestingCommands {
         Random random = new Random();
         List<String> adjectives = objectMapper.convertValue(root.get("adjectives"), List.class);
         List<String> nouns = objectMapper.convertValue(root.get("nouns"), List.class);
-
-        if (count > 100) {
-            count = 100;
-        }
 
         Set<String> generatedNames = new HashSet<>();
 

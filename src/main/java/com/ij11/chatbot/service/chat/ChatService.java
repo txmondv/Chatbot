@@ -1,10 +1,10 @@
 package com.ij11.chatbot.service.chat;
 
-import com.ij11.chatbot.models.chat.Chat;
-import com.ij11.chatbot.models.chat.ChatMessage;
-import com.ij11.chatbot.models.users.User;
-import com.ij11.chatbot.repositories.ChatMessageRepository;
-import com.ij11.chatbot.repositories.ChatRepository;
+import com.ij11.chatbot.domain.models.chat.Chat;
+import com.ij11.chatbot.domain.models.chat.ChatMessage;
+import com.ij11.chatbot.domain.models.users.User;
+import com.ij11.chatbot.domain.repositories.ChatMessageRepository;
+import com.ij11.chatbot.domain.repositories.ChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
