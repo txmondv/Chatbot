@@ -51,8 +51,7 @@ public class ConfigManager {
             try {
                 field.setAccessible(true);
                 Object entryObject = field.get(null);
-                if (entryObject instanceof ConfigEntry<?>) {
-                    ConfigEntry<?> entry = (ConfigEntry<?>) entryObject;
+                if (entryObject instanceof ConfigEntry<?> entry) {
                     String rawValue = properties.getProperty(key);
                     Object value = ConfigEntry.parseValue(rawValue, entry.getType(), entry.getDefaultValue());
 

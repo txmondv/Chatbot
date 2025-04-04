@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const data = await serviceLogin({ username, password });
       if (data.error || !data.token) return data?.error ?? "Login fehlgeschlagen.";
-      Cookies.set("accessToken", data.token, { secure: true, sameSite: "Strict" });   
+      Cookies.set("accessToken", data.token, { sameSite: "Strict" });   
       setAuthenticated(true);
       if (redirect) navigate("/");
       return null;
