@@ -7,6 +7,7 @@ import { getStorageValue, setStorageValue } from "../../../storage/StorageProvid
 import { SidebarItem } from "./SidebarItem.tsx";
 import { useGetUserRoles } from "../../../hooks/Profile.hooks.ts";
 import { BiUser } from "react-icons/bi";
+import { FaLaptopCode } from "react-icons/fa";
 
 interface SidebarProps {
     handleSidebarLock: (expanded: boolean) => void;
@@ -74,6 +75,14 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSidebarLock }) => {
                     onClick={"/"}
                     expanded={expanded}
                 />
+                <SidebarItem
+                    icon={<BsChat />}
+                    title={"Chats"}
+                    active={false}
+                    alert={false}
+                    onClick={"/chats/"}
+                    expanded={expanded}
+                />
                 {roles?.includes("MANAGER") && (
                     <SidebarItem
                         icon={<BiUser />}
@@ -84,14 +93,16 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSidebarLock }) => {
                         expanded={expanded}
                     />
                 )}
-                <SidebarItem
-                    icon={<BsChat />}
-                    title={"Chats"}
-                    active={false}
-                    alert={false}
-                    onClick={"/chats/"}
-                    expanded={expanded}
-                />
+                {roles?.includes("TECHNICAL") && (
+                    <SidebarItem
+                        icon={<FaLaptopCode />}
+                        title={"Modelle"}
+                        active={false}
+                        alert={false}
+                        onClick={"/models/"}
+                        expanded={expanded}
+                    />
+                )}
             </nav>
         </div>
     )

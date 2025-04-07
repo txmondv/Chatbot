@@ -1,5 +1,6 @@
 package com.ij11.chatbot.core.configurations;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ij11.chatbot.core.annotations.ConfigFile;
 import com.ij11.chatbot.core.annotations.ConfigProperty;
 import io.github.classgraph.ClassGraph;
@@ -84,8 +85,17 @@ public class ConfigManager {
 
     public static void saveProperties(File file, String key, String description, Object defaultValue) {
         try (FileWriter writer = new FileWriter(file, true)) {
-            writer.write("# " + description + "\n");
-            writer.write(key + "=" + defaultValue + "\n\n");
+            for (String line : description.split("\n")) writer.write("# " + line + "\n");
+
+            String valueString;
+            if (!(defaultValue instanceof String)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                valueString = objectMapper.writeValueAsString(defaultValue);
+            } else {
+                valueString = String.valueOf(defaultValue);
+            }
+
+            writer.write(key + "=" + valueString + "\n\n");
         } catch (IOException e) {
             MAIN_LOGGER.error("Failed to save config file: {}", file.getPath(), e);
         }

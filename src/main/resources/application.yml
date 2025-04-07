@@ -12,10 +12,11 @@ spring:
   shell:
     interactive:
       enabled: true
-    history:
-      enabled: true
     jline:
       terminal: jansi
+    history:
+      enabled: true
+      name: "./logs/shell-history.log"
   output:
     ansi:
       enabled: DETECT

@@ -26,6 +26,7 @@ public class OllamaChatService {
     private final OllamaChatClient ollamaClient;
     private final ChatService chatService;
 
+    @Transactional
     public Chat startNewChat(User user, String model) {
         Chat chat = new Chat();
         Long maxId = chatRepository.findMaxId().orElse(0L);
@@ -50,7 +51,6 @@ public class OllamaChatService {
         }
 
         ChatMessage userMessage = new ChatMessage(null, chat, ChatMessageOrigin.USER, messageContent, LocalDateTime.now());
-        chatMessageRepository.save(userMessage);
 
         String llmResponse = ollamaClient.chat(
                 chat.getModel(),
@@ -58,6 +58,7 @@ public class OllamaChatService {
                 messageContent
         );
 
+        chatMessageRepository.save(userMessage);
         ChatMessage llmMessage = new ChatMessage(null, chat, ChatMessageOrigin.LLM, llmResponse, LocalDateTime.now());
         return chatMessageRepository.save(llmMessage);
     }

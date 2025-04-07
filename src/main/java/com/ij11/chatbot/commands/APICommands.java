@@ -1,5 +1,6 @@
 package com.ij11.chatbot.commands;
 
+import com.ij11.chatbot.core.annotations.LoggingCommand;
 import com.ij11.chatbot.core.commands.CommandManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class APICommands {
 
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
+    @LoggingCommand
     @ShellMethod("Prints registered API routes, sorted by path")
     public void routes(@ShellOption(defaultValue = ShellOption.NULL, help = "Path under which the routes are registered") String path) {
         List<RouteInfo> routes = new ArrayList<>();

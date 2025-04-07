@@ -1,25 +1,27 @@
 package com.ij11.chatbot.service.chat;
 
-import com.ij11.chatbot.config.ChatbotUserConfig;
+import com.ij11.chatbot.config.OllamaUserConfig;
+import com.ij11.chatbot.config.RequestUserConfig;
+import com.ij11.chatbot.config.ServerUserConfig;
 import com.ij11.chatbot.domain.models.chat.ChatMessage;
 import com.ij11.chatbot.domain.models.chat.ChatMessageOrigin;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
 public class OllamaChatClient {
 
+    private final Logger Logger = LoggerFactory.getLogger(OllamaChatClient.class);
     private final RestTemplate restTemplate = new RestTemplate();
     private static final String OLLAMA_API_URL =
-            ChatbotUserConfig.OLLAMA_ADDRESS.get() + ":" + ChatbotUserConfig.OLLAMA_PORT.get() + "/api/chat";
+            OllamaUserConfig.OLLAMA_ADDRESS.get() + ":" + OllamaUserConfig.OLLAMA_PORT.get() + "/api/chat";
 
     public String generateTitle(String model, String userMessage) {
         return respond(getRequestBody(model, List.of(), userMessage, true));
@@ -33,6 +35,10 @@ public class OllamaChatClient {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+
+        if(ServerUserConfig.LOG_CHAT_REQUESTS.get()) {
+            Logger.info("[POST] <{}> {}", OLLAMA_API_URL, requestBody.toString());
+        }
 
         ResponseEntity<Map> response = restTemplate.exchange(OLLAMA_API_URL, HttpMethod.POST, entity, Map.class);
 
@@ -59,19 +65,26 @@ public class OllamaChatClient {
 
     private static Map<String, Object> getOptions() {
         Map<String, Object> options = new HashMap<>();
-        options.put("num_predict", ChatbotUserConfig.OLLAMA_MAX_TOKENS.get());
-        options.put("temperature", ChatbotUserConfig.OLLAMA_TEMPERATURE.get());
-        if(ChatbotUserConfig.OLLAMA_PREDICTABLE.get()) options.put("seed", 42);
-        options.put("top_p", ChatbotUserConfig.OLLAMA_TOP_P.get());
+        options.put("num_predict", OllamaUserConfig.OLLAMA_MAX_TOKENS.get());
+        options.put("temperature", OllamaUserConfig.OLLAMA_TEMPERATURE.get());
+        if(OllamaUserConfig.OLLAMA_PREDICTABLE.get()) options.put("seed", 42);
+        options.put("top_p", OllamaUserConfig.OLLAMA_TOP_P.get());
         return options;
     }
 
     private static List<Map<String, String>> getMessages(List<ChatMessage> history, String userMessage, boolean isTitleGeneration) {
         List<Map<String, String>> messages = new ArrayList<>();
-        if(isTitleGeneration) {
-            Map<String, String> systemMessage = new HashMap<>();
-            systemMessage.put("role", "system");
-            systemMessage.put("content", "Generate a concise and relevant chat title based on the user's messages. Also respect the language chosen by the user and keep any formatting out.");
+
+        Map<String, String> systemMessage = new HashMap<>();
+        systemMessage.put("role", "system");
+
+        if (isTitleGeneration) {
+            String prompt = OllamaUserConfig.OLLAMA_TITLE_PROMPT.get();
+            systemMessage.put("content", applyPromptVariables(prompt));
+            messages.add(systemMessage);
+        } else if (!Objects.equals(OllamaUserConfig.OLLAMA_SYSTEM_MESSAGE.get(), "")) {
+            String systemPrompt = OllamaUserConfig.OLLAMA_SYSTEM_MESSAGE.get();
+            systemMessage.put("content", applyPromptVariables(systemPrompt));
             messages.add(systemMessage);
         }
 
@@ -87,5 +100,12 @@ public class OllamaChatClient {
         userMsgEntry.put("content", userMessage);
         messages.add(userMsgEntry);
         return messages;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static String applyPromptVariables(String input) {
+        input = input.replace("${categories}", Arrays.toString(RequestUserConfig.PROMPTVAR_CATEGORIES.get().split(", ")));
+
+        return input;
     }
 }

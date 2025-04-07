@@ -26,7 +26,7 @@ public class UserInfoController {
     }
 
     @Authorized
-    @Roles({UserRole.MANAGER, UserRole.SUPPORTER})
+    @Roles({UserRole.MANAGER})
     @GetMapping("/getUsers")
     public List<UserDto> getUsers() {
         return userInfoService.getUsers();

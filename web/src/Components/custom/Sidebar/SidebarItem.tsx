@@ -1,6 +1,6 @@
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 import React from "react";
- 
+
 interface SidebarItemProps {
     icon: React.ReactNode;
     title: string;
@@ -11,33 +11,33 @@ interface SidebarItemProps {
     isStandalone?: boolean;
     hideBorder?: boolean;
 }
- 
+
 export const SidebarItem: React.FC<SidebarItemProps> = ({
-                                                            icon,
-                                                            title,
-                                                            active = false,
-                                                            alert = false,
-                                                            onClick,
-                                                            expanded,
-                                                            isStandalone = true,
-                                                            hideBorder = true
-                                                        }) => {
+    icon,
+    title,
+    active = false,
+    alert = false,
+    onClick,
+    expanded,
+    isStandalone = true,
+    hideBorder = true
+}) => {
     const navigate = useNavigate();
- 
+
     return (
         <div onClick={typeof onClick == "string" ? () => navigate(onClick) : onClick}>
             <li
                 className={`
-                    transition-all duration-300 relative flex items-center py-2 px-3 my-1
+                    transition-colors duration-300 relative flex items-center py-2 px-3 my-1
                     font-medium rounded-md cursor-pointer group
                     ${isStandalone
-                    ? !hideBorder && `border-b rounded-b-none border-gray-400`
-                    : `select-none ml-4 border-l rounded-l-none font-medium cursor-pointer bg-white 
-                       hover:border-gray-400 px-3 py-2 items-center rounded-lg group dark:bg-zinc-800 
-                       dark:border-gray-400 dark:hover:border-white`}
+                        ? !hideBorder && `border-b rounded-b-none border-gray-400`
+                        : `select-none ml-4 border-l rounded-l-none font-medium cursor-pointer bg-white 
+                            px-3 py-2 items-center rounded-lg group dark:bg-zinc-800 
+                            border-gray-400 hover:border-white`}
                     ${active
-                    ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800 dark:text-gray-900 dark:hover:text-black"
-                    : "hover:bg-indigo-50 text-gray-600 hover:dark:bg-zinc-700 dark:text-gray-400 dark:hover:text-white"}
+                        ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-gray-900 hover:text-black"
+                        : "hover:bg-zinc-700 text-gray-400"}
                 `}
             >
                 {icon}
@@ -51,14 +51,14 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
                         }`}
                     />
                 )}
- 
+
                 {!expanded && (
                     <div
                         className={`
-                          absolute left-full rounded-md px-2 py-1 ml-6
-                          bg-indigo-100 text-indigo-800 text-sm
-                          invisible opacity-20 -translate-x-3 transition-opacity duration-300 ease-in-out
-                          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+                            absolute left-full rounded-md px-2 py-1 ml-6
+                            bg-indigo-100 text-indigo-800 text-sm
+                            invisible opacity-20 -translate-x-3 transition-opacity duration-300 ease-in-out
+                            group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
                         `}
                     >
                         {title}
@@ -67,4 +67,4 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
             </li>
         </div>
     );
-}
+};

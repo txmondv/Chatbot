@@ -4,6 +4,7 @@ import com.ij11.chatbot.domain.models.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -34,5 +35,5 @@ public class Chat {
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("timestamp ASC")
-    private List<ChatMessage> messages;
+    private List<ChatMessage> messages = new ArrayList<>();;
 }

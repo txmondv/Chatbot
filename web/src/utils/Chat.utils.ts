@@ -19,3 +19,23 @@ export const extractThoughtProcess = (message: string): ThoughtProccess  => {
 
     return returnObj;
 }
+
+export function extractButtonFromHtml(markdown: string) {
+    const buttonRegex = /<button\s+onclick=["']createTicket\(\s*['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]\s*,\s*['"]([^'"]+)['"]\s*\)["']\s*>([^<]+)<\/button>/i;
+    const match = markdown.match(buttonRegex);
+
+    if (match) {
+        const [, category, title, description, label] = match;
+        const cleanedMarkdown = markdown.replace(buttonRegex, "").trim();
+
+        return {
+            category,
+            title,
+            description,
+            label,
+            cleanedMarkdown
+        };
+    }
+
+    return null;
+}

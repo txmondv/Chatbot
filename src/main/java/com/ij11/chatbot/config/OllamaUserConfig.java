@@ -4,15 +4,10 @@ import com.ij11.chatbot.core.annotations.ConfigFile;
 import com.ij11.chatbot.core.annotations.ConfigProperty;
 import com.ij11.chatbot.core.configurations.ConfigEntry;
 
-@ConfigFile("chatbot.properties")
-public class ChatbotUserConfig {
+import java.util.Map;
 
-    @ConfigProperty("webserver.port")
-    public static ConfigEntry<Integer> WEBSERVER_PORT =
-            new ConfigEntry<>(
-                    Integer.class,
-                    8080,
-                    "The port the webserver should be served on");
+@ConfigFile("ollama.properties")
+public class OllamaUserConfig {
 
     @ConfigProperty("ollama.address")
     public static ConfigEntry<String> OLLAMA_ADDRESS =
@@ -27,6 +22,20 @@ public class ChatbotUserConfig {
                     Integer.class,
                     11434,
                     "Your Ollama port. (Default: 11434).");
+
+    @ConfigProperty("ollama.prompt.titlegeneration")
+    public static ConfigEntry<String> OLLAMA_TITLE_PROMPT =
+            new ConfigEntry<>(
+                    String.class,
+                    "\"Generate a concise and relevant chat title based on the user's first message. Also respect the language chosen by the user and keep any formatting out. Make sure the title is not too long (max. 100 Characters) and SUMMARIZES what the initial request is about.\"",
+                    "The prompt used to generate titles for the conversation. The title is only generated once after the first userMessage is submitted.");
+
+    @ConfigProperty("ollama.prompt.systemmessage")
+    public static ConfigEntry<String> OLLAMA_SYSTEM_MESSAGE =
+            new ConfigEntry<>(
+                    String.class,
+                    "",
+                    "This prompt is sent to the LLM before every chat request (except for the title request). Use this to personalize the chatbot or leave empty to disable it.");
 
     @ConfigProperty("ollama.prompt.maxtokens")
     public static ConfigEntry<Integer> OLLAMA_MAX_TOKENS =

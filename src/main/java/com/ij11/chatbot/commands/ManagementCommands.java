@@ -1,5 +1,6 @@
 package com.ij11.chatbot.commands;
 
+import com.ij11.chatbot.core.annotations.LoggingCommand;
 import com.ij11.chatbot.core.commands.CommandManager;
 import com.ij11.chatbot.domain.models.users.UserRole;
 import com.ij11.chatbot.service.users.UserInfoService;
@@ -14,8 +15,8 @@ import org.springframework.shell.standard.ShellOption;
 public class ManagementCommands {
 
     UserRoleService roleService;
-    UserInfoService userService;
 
+    @LoggingCommand
     @ShellMethod("Adds the manager role to the user")
     public void addManager(@ShellOption(help = "User to add the role to") String userName) {
         if(roleService.getRoles(userName).contains(UserRole.MANAGER)) {
@@ -23,10 +24,11 @@ public class ManagementCommands {
             return;
         }
 
-        roleService.addRole(userName, UserRole.MANAGER);
+        roleService.makeManager(userName);
         CommandManager.logCommandResult("Managers", "User \"" + userName + "\" is now a manager");
     }
 
+    @LoggingCommand
     @ShellMethod("Removes the manager role from the user")
     public void removeManager(@ShellOption(help = "User to remove the role from") String userName) {
         if(!roleService.getRoles(userName).contains(UserRole.MANAGER)) {
