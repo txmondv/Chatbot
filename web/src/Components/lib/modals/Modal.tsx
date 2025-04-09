@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { CgClose } from "react-icons/cg";
+import { useEffect } from 'react';
+import { FiX } from 'react-icons/fi';
 
 interface ModalProps {
     isOpen: boolean;
@@ -7,39 +7,52 @@ interface ModalProps {
     children: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                onClose();
-            }
-        };
-
         if (isOpen) {
-            document.addEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = 'hidden';
         } else {
-            document.removeEventListener("keydown", handleKeyDown);
+            document.body.style.overflow = '';
         }
 
-        return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [isOpen, onClose]);
+        return () => {
+            document.body.style.overflow = ''; 
+        };
+    }, [isOpen]);
 
     if (!isOpen) return null;
 
+    const handleBackdropClick = () => {
+        onClose();
+    };
+
+    const handleContentClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            onClose();
+        }
+    };
+
     return (
-        <div 
-            className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-lg z-50" 
-            onClick={onClose}
+        <div
+            onClick={handleBackdropClick}
+            onKeyDown={handleKeyDown}
+            tabIndex={-1}
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
         >
-            <div 
-                className="bg-zinc-900 p-5 rounded-lg shadow-lg w-[90%] max-w-md relative" 
-                onClick={(e) => e.stopPropagation()}
+            <div
+                onClick={handleContentClick}
+                className="bg-zinc-800 p-6 rounded-xl shadow-xl w-full max-w-2xl text-white relative"
             >
-                <button 
-                    onClick={onClose} 
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 text-white hover:text-cyan-400 transition"
+                    aria-label="Close modal"
                 >
-                    <CgClose />
+                    <FiX size={24} />
                 </button>
                 {children}
             </div>

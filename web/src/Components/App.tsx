@@ -7,7 +7,6 @@ import { Navbar } from "./custom/Navbar/Navbar";
 import Sidebar from "./custom/Sidebar/Sidebar";
 import ChatPage from "./pages/chats/ChatPage";
 import ChatsOverviewPage from "./pages/chats/ChatsOverviewPage";
-import DashboardPage from "./pages/DashboardPage";
 import NotFoundPage from "./pages/lib/NotFoundPage";
 import LoginPage from "./pages/user/LoginPage";
 import LogoutPage from "./pages/user/LogoutPage";
@@ -16,6 +15,10 @@ import RegisterPage from "./pages/user/RegisterPage";
 import UserManagementPage from "./pages/admin/UserManagementPage";
 import OllamaModelPage from "./pages/admin/OllamaModelPage";
 import ModelsOverviewPage from "./pages/admin/ModelsOverviewPage";
+import { UserTicketsPage } from "./pages/tickets/UserTicketsPage";
+import UserTicketViewPage from "./pages/tickets/UserTicketViewPage";
+import HomePage from "./pages/home/HomePage";
+import DashboardPage from "./pages/admin/DashboardPage";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { authenticated: isAuthenticated, loading } = useAuth();
@@ -30,39 +33,41 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-      <div className="flex min-h-screen max-w-screen bg-zinc-900 text-white">
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/logout" element={<LogoutPage />} />
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <>
-                  <Sidebar handleSidebarLock={setSidebarLocked} />
-                  <div className={`flex flex-col w-full transition-all duration-300 ${sidebarLocked ? "ml-72" : "ml-16"}`}>
-                    <Navbar sidebarExpanded={sidebarLocked} links={profileDropdownLinks} className={`mb-2 transition-all duration-300 ${sidebarLocked ? "ml-72" : "ml-16"}`} />
-                    <div className="flex-1 overflow-auto mt-16">
-                      <Routes>
-                        <Route path="/" element={<DashboardPage />} />
-                        <Route path="/profile" element={<ProfilePage />} />
-                        <Route path="/users" element={<UserManagementPage />} />
-                        <Route path="/models" element={<ModelsOverviewPage />} />
-                        <Route path="/model/:modelName" element={<OllamaModelPage />} />
-                        <Route path="/chats" element={<ChatsOverviewPage />} />
-                        <Route path="/chats" element={<ChatsOverviewPage />} />
-                        <Route path="/chats/:chatId" element={<ChatPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                      </Routes>
+        <div className="flex min-h-screen max-w-screen bg-zinc-900 text-white">
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/logout" element={<LogoutPage />} />
+            <Route
+              path="/*"
+              element={
+                <ProtectedRoute>
+                  <>
+                    <Sidebar handleSidebarLock={setSidebarLocked} />
+                    <div className={`flex flex-col w-full transition-all duration-300 ${sidebarLocked ? "ml-72" : "ml-16"}`}>
+                      <Navbar sidebarExpanded={sidebarLocked} links={profileDropdownLinks} className={`mb-2 transition-all duration-300 ${sidebarLocked ? "ml-72" : "ml-16"}`} />
+                      <div className="flex-1 overflow-auto mt-16">
+                        <Routes>
+                          <Route path="/" element={<HomePage />} />
+                          <Route path="/profile" element={<ProfilePage />} />
+                          <Route path="/users" element={<UserManagementPage />} />
+                          <Route path="/dashboard" element={<DashboardPage />} />
+                          <Route path="/models" element={<ModelsOverviewPage />} />
+                          <Route path="/model/:modelName" element={<OllamaModelPage />} />
+                          <Route path="/chats" element={<ChatsOverviewPage />} />
+                          <Route path="/chats/:chatId" element={<ChatPage />} />
+                          <Route path="/tickets" element={<UserTicketsPage />} />
+                          <Route path="/tickets/:ticketId" element={<UserTicketViewPage />} />
+                          <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                      </div>
                     </div>
-                  </div>
-                </>
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
+                  </>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </div>
       </AuthProvider>
     </Router>
   );

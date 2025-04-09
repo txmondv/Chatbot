@@ -31,4 +31,8 @@ public class User {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private Set<UserRole> roles;
+
+    public boolean hasRole(UserRole role) {
+        return this.roles.stream().anyMatch(userRole -> userRole.equals(role));
+    }
 }

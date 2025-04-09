@@ -32,6 +32,10 @@ public class UserInfoService {
         return userRepository.findByUsernameIgnoreCase(userName);
     }
 
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
     public List<UserDto> getUsers() {
         return userRepository.findAll().stream()
                 .map(user -> new UserDto(user.getId(), user.getUsername(), user.getRoles()))

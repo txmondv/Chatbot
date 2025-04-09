@@ -1,0 +1,13 @@
+Erstelle ein JSON-Objekt mit den folgenden Feldern:
+- "category": Wähle eine passende Kategorie aus der folgenden Liste: ${categories}. Sollte keine der Kategorien zutreffen, verwende "Sonstiges".
+- "title": Gib einen prägnanten, maximal wenige Wörter langen Titel, der das Problem des Kunden klar und verständlich zusammenfasst.
+- "summary": Erstelle eine strukturierte, umfassende und verständliche Zusammenfassung des vom Kunden geschilderten Problems.
+
+Die Beschreibung soll alle relevanten Details, Kontextinformationen, betroffene Systeme oder Benutzer, sowie zeitliche Abläufe, beobachtete Symptome und bereits durchgeführte Maßnahmen enthalten.
+Gliedere den Text durch sinnvolle Absätze:
+- Einleitung: Was ist grundsätzlich das Problem? Wer ist betroffen?
+- Details: Welche Systeme, Komponenten oder Abläufe sind betroffen? Was funktioniert nicht wie erwartet?
+- Beobachtungen: Welche Symptome wurden festgestellt? Gibt es Fehlermeldungen? Tritt das Problem regelmäßig oder sporadisch auf?
+- Bisherige Maßnahmen: Was wurde bereits unternommen, um das Problem zu lösen? Mit welchem Ergebnis?
+
+Ziel ist es, dass ein Sachbearbeiter oder Techniker die Beschreibung ohne Rückfragen vollständig verstehen und bearbeiten kann.

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { getAllUsers, getUsername, getUserRoles } from "../service/User.service";
-import { User } from "../types/User.types";
+import { User, UserRole } from "../types/User.types";
 
 export const useGetUsername = () => {
     return useQuery<string>({
@@ -11,7 +11,7 @@ export const useGetUsername = () => {
 };
 
 export const useGetUserRoles = () => {
-    return useQuery<string[]>({
+    return useQuery<UserRole[]>({
         queryKey: "userRoles",
         queryFn: getUserRoles
     });

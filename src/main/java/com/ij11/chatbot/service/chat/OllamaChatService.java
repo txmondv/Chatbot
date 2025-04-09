@@ -1,12 +1,16 @@
 package com.ij11.chatbot.service.chat;
 
 import com.ij11.chatbot.api.dto.chat.ChatInfo;
+import com.ij11.chatbot.api.dto.chat.ChatSummary;
 import com.ij11.chatbot.domain.models.chat.Chat;
 import com.ij11.chatbot.domain.models.chat.ChatMessage;
 import com.ij11.chatbot.domain.models.chat.ChatMessageOrigin;
+import com.ij11.chatbot.domain.models.tickets.Ticket;
 import com.ij11.chatbot.domain.models.users.User;
 import com.ij11.chatbot.domain.repositories.ChatMessageRepository;
 import com.ij11.chatbot.domain.repositories.ChatRepository;
+import com.ij11.chatbot.domain.repositories.TicketRepository;
+import com.ij11.chatbot.service.tickets.ChatbotTicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +27,7 @@ public class OllamaChatService {
 
     private final ChatRepository chatRepository;
     private final ChatMessageRepository chatMessageRepository;
+    private final ChatbotTicketService ticketService;
     private final OllamaChatClient ollamaClient;
     private final ChatService chatService;
 
@@ -91,7 +96,14 @@ public class OllamaChatService {
     }
 
     public void deleteChat(Long chatId) {
+        ticketService.removeChatFromTickets(chatId);
         chatService.deleteChat(chatId);
+    }
+
+    public void deleteAllChats(User user) {
+        for(Chat chat : chatService.getChatsByUser(user)) {
+            deleteChat(chat.getId());
+        }
     }
 
     public Optional<Chat> getChatById(Long chatId) {
@@ -104,6 +116,13 @@ public class OllamaChatService {
 
     public List<ChatMessage> getChatMessages(Long chatId) {
         return chatService.getChatMessages(chatId);
+    }
+
+    public Optional<ChatSummary> generateSummary(Long chatId) {
+        Optional<Chat> chatOpt = getChatById(chatId);
+        if (chatOpt.isEmpty()) return Optional.empty();
+        Chat chat = chatOpt.get();
+        return Optional.of(ollamaClient.summarize(chat.getModel(), chatService.getChatMessages(chat.getId())));
     }
 
 }

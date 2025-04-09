@@ -4,10 +4,10 @@ import { TfiThought } from "react-icons/tfi";
 import ReactMarkdown from "react-markdown";
 import { SyncLoader } from "react-spinners";
 import { ChatMessage } from "../../../types/Chat.types";
+import { extractThoughtProcess } from "../../../utils/Chat.utils";
 import SimpleDropdownMenu from "../../lib/dropdown/SimpleDropdownMenu";
 import { Modal } from "../../lib/modals/Modal";
 import { ProfileImage } from "../Profile/ProfileImage";
-import { extractButtonFromHtml, extractThoughtProcess } from "../../../utils/Chat.utils";
 
 import rehypeRaw from "rehype-raw";
 
@@ -23,31 +23,19 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({
     userName,
     className = "",
     message,
-    loading = false,
+    loading = false
 }) => {
     const [thoughtProcess, setThoughtProcess] = useState<string | null>(null);
     const [filteredMessage, setFilteredMessage] = useState<string>(message.content);
-    const [extractedButton, setExtractedButton] = useState<{ category: string; title: string; description: string; label: string; } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const thoughtProcess = extractThoughtProcess(message.content);
-        const buttonData = extractButtonFromHtml(thoughtProcess.answer);
 
         setThoughtProcess(thoughtProcess.thoughts);
-        if (buttonData) {
-            setFilteredMessage(buttonData.cleanedMarkdown);
-            setExtractedButton(buttonData);
-        } else {
-            setFilteredMessage(thoughtProcess.answer);
-            setExtractedButton(null);
-        }
+        setFilteredMessage(thoughtProcess.answer);
     }, [message.content]);
 
-
-    function createTicket(category: string, title: string, description: string) {
-        console.log(`[${category}]:`, `${title} - ${description}`);
-    }
 
     function copyToClipboard(close: () => void) {
         navigator.clipboard.writeText(message.content);
@@ -74,15 +62,6 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({
                         <div className="flex flex-row gap-2">
                             <div className="flex-1 self-center max-w-full overflow-auto break-words">
                                 <ReactMarkdown rehypePlugins={[rehypeRaw]}>{filteredMessage}</ReactMarkdown>
-                                {extractedButton && (
-                                    <button
-                                        className="mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded ticket-button"
-                                        onClick={() => createTicket(extractedButton.category, extractedButton.title, extractedButton.description)}
-                                    >
-                                        {extractedButton.label}
-                                    </button>
-                                )}
-
                             </div>
                             {message.origin === "LLM" && (
                                 <SimpleDropdownMenu

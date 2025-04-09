@@ -39,3 +39,6 @@ export function extractButtonFromHtml(markdown: string) {
 
     return null;
 }
+
+export const getTitle = (title: string) =>
+    extractThoughtProcess(title).answer.trim().replace(/^"+|"+$/g, "");

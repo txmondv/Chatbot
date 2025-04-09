@@ -1,9 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 import { Chat, ChatMessage } from "../types/Chat.types";
 import { createChat, getChatById, getChatInfo, getChats, sendMessage } from "../service/Chat.service";
 
-export const useChats = () => {
-    return useQuery<Chat[]>({ queryKey: ["chats"], queryFn: getChats });
+export const useChats = (
+    options?: UseQueryOptions<Chat[], Error>
+) => {
+    return useQuery<Chat[], Error>({
+        queryKey: ["chats"],
+        queryFn: getChats,
+        ...options,
+    });
 };
 
 export const useChat = (chatId: number) => {

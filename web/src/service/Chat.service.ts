@@ -1,4 +1,4 @@
-import { Chat, ChatMessage } from "../types/Chat.types";
+import { Chat, ChatMessage, ChatSummary } from "../types/Chat.types";
 import { FetchWrapper } from "../utils/FetchWrapper";
 
 export const getChats = async (): Promise<Chat[]> => 
@@ -21,3 +21,9 @@ export const setChatTitle = async (chatId: number, title: string): Promise<Chat>
 
 export const deleteChat = async (chatId: number): Promise<void> => 
     FetchWrapper.delete<void>(`/api/chats/${chatId}/delete`);
+
+export const deleteAllChats = async (): Promise<void> => 
+    FetchWrapper.delete<void>(`/api/chats/deleteAllChats`);
+
+export const getSummary = async (chatId: number): Promise<ChatSummary> => 
+    FetchWrapper.get<ChatSummary>(`/api/chats/${chatId}/getSummary`);

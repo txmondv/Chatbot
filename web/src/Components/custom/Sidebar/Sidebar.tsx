@@ -1,13 +1,19 @@
 import React, { useEffect, useState, } from "react";
-import { BsChat, BsChevronBarLeft, BsChevronBarRight } from "react-icons/bs";
+import { BiSupport, BiUser } from "react-icons/bi";
+import { BsChat, BsChevronBarLeft, BsChevronBarRight, BsTicket } from "react-icons/bs";
+import { FaLaptopCode } from "react-icons/fa";
+import { HiOutlineHome } from "react-icons/hi2";
+import { IoBriefcaseOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { TbBoxModel2 } from "react-icons/tb";
 import { useNavigate } from "react-router";
 import logo from "../../../assets/sidebar-icon.png";
-import { getStorageValue, setStorageValue } from "../../../storage/StorageProvider.ts";
-import { SidebarItem } from "./SidebarItem.tsx";
 import { useGetUserRoles } from "../../../hooks/Profile.hooks.ts";
-import { BiUser } from "react-icons/bi";
-import { FaLaptopCode } from "react-icons/fa";
+import { getStorageValue, setStorageValue } from "../../../storage/StorageProvider.ts";
+import { SidebarDivider } from "./SidebarDivider.tsx";
+import { SidebarDropdown } from "./SidebarDropdown.tsx";
+import { SidebarItem } from "./SidebarItem.tsx";
+import { IoMdPaper } from "react-icons/io";
 
 interface SidebarProps {
     handleSidebarLock: (expanded: boolean) => void;
@@ -68,8 +74,8 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSidebarLock }) => {
                 ${!expanded && "overflow-x-hidden"}
             `}>
                 <SidebarItem
-                    icon={<LuLayoutDashboard />}
-                    title={"Dashboard"}
+                    icon={<HiOutlineHome />}
+                    title={"Home"}
                     active={false}
                     alert={false}
                     onClick={"/"}
@@ -83,25 +89,64 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSidebarLock }) => {
                     onClick={"/chats/"}
                     expanded={expanded}
                 />
-                {roles?.includes("MANAGER") && (
-                    <SidebarItem
-                        icon={<BiUser />}
-                        title={"Management"}
-                        active={false}
-                        alert={false}
-                        onClick={"/users/"}
-                        expanded={expanded}
-                    />
-                )}
-                {roles?.includes("TECHNICAL") && (
-                    <SidebarItem
-                        icon={<FaLaptopCode />}
-                        title={"Modelle"}
-                        active={false}
-                        alert={false}
-                        onClick={"/models/"}
-                        expanded={expanded}
-                    />
+                <SidebarItem
+                    icon={<BsTicket />}
+                    title={"Tickets"}
+                    active={false}
+                    alert={false}
+                    onClick={"/tickets/"}
+                    expanded={expanded}
+                />
+                {roles && roles?.length > 0 && (
+                    <div>
+                        <SidebarDivider expanded={expanded}  />
+                        {roles?.includes("SUPPORT") && (
+                            <SidebarDropdown sidebarExpanded={expanded} icon={<BiSupport />} title={"Support"} hideBorder={true}>
+                                <SidebarItem
+                                    icon={<IoMdPaper />}
+                                    title={"Anfragen"}
+                                    active={false}
+                                    alert={false}
+                                    onClick={"/requests/"}
+                                    expanded={expanded}
+                                />
+                            </SidebarDropdown>
+
+                        )}
+                        {roles?.includes("MANAGER") && (
+                            <SidebarDropdown sidebarExpanded={expanded} icon={<IoBriefcaseOutline />} title={"Verwaltung"} hideBorder={true}>
+                                <SidebarItem
+                                    icon={<BiUser />}
+                                    title={"Benutzer"}
+                                    active={false}
+                                    alert={false}
+                                    onClick={"/users/"}
+                                    expanded={expanded}
+                                />
+                            </SidebarDropdown>
+
+                        )}
+                        {roles?.includes("TECHNICAL") && (
+                            <SidebarDropdown sidebarExpanded={expanded} icon={<FaLaptopCode />} title={"Technisches"} hideBorder={true}>
+                                <SidebarItem
+                                    icon={<LuLayoutDashboard />}
+                                    title={"Dashboard"}
+                                    active={false}
+                                    alert={false}
+                                    onClick={"/dashboard"}
+                                    expanded={expanded}
+                                />
+                                <SidebarItem
+                                    icon={<TbBoxModel2 />}
+                                    title={"Modelle"}
+                                    active={false}
+                                    alert={false}
+                                    onClick={"/models/"}
+                                    expanded={expanded}
+                                />
+                            </SidebarDropdown>
+                        )}
+                    </div>
                 )}
             </nav>
         </div>

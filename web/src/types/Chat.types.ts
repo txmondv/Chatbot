@@ -15,3 +15,9 @@ export interface ChatMessage {
     content: string;
     timestamp: string;
 }
+
+export interface ChatSummary {
+    category: string;
+    title: string;
+    summary: string;
+}

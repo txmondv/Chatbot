@@ -31,7 +31,6 @@ public class AuthService implements UserDetailsService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRoles(Collections.singleton(UserRole.USER));
         return Optional.of(userRepository.save(user));
     }
 

@@ -34,7 +34,7 @@ export const SidebarDropdown: React.FC<SidebarDropdownProps> = ({
             >
                 <li
                     className={
-                        "select-none relative flex items-center py-2 px-3 my-1 font-medium cursor-pointer rounded-md transition-colors group hover:bg-indigo-50 text-gray-600 dark:text-gray-400 dark:hover:text-white dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-b-none"
+                        "select-none relative flex items-center py-2 px-3 my-1 font-medium cursor-pointer rounded-md transition-colors group text-gray-600 dark:text-gray-400 bg-zinc-800 hover:bg-zinc-700 rounded-b-none"
                     }
                 >
                     {icon}
@@ -54,7 +54,7 @@ export const SidebarDropdown: React.FC<SidebarDropdownProps> = ({
                     </div>
                 </li>
             </div>
-            <div className={`${!hideBorder && "border-b"} border-gray-400 mt-[-4px]`}>
+            <div className={`${!hideBorder && "border-b"} border-gray-400`}>
                 <div className={`ml-4`}>
                     {dropdownState &&
                         sidebarExpanded &&

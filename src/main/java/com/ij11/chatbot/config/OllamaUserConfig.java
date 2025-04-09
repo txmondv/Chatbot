@@ -30,13 +30,6 @@ public class OllamaUserConfig {
                     "\"Generate a concise and relevant chat title based on the user's first message. Also respect the language chosen by the user and keep any formatting out. Make sure the title is not too long (max. 100 Characters) and SUMMARIZES what the initial request is about.\"",
                     "The prompt used to generate titles for the conversation. The title is only generated once after the first userMessage is submitted.");
 
-    @ConfigProperty("ollama.prompt.systemmessage")
-    public static ConfigEntry<String> OLLAMA_SYSTEM_MESSAGE =
-            new ConfigEntry<>(
-                    String.class,
-                    "",
-                    "This prompt is sent to the LLM before every chat request (except for the title request). Use this to personalize the chatbot or leave empty to disable it.");
-
     @ConfigProperty("ollama.prompt.maxtokens")
     public static ConfigEntry<Integer> OLLAMA_MAX_TOKENS =
             new ConfigEntry<>(

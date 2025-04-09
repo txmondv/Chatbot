@@ -20,7 +20,12 @@ export const Navbar: React.FC<NavbarProps> = ({ links, className = "", sidebarEx
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
     const { data: userName } = useGetUsername();
-    const { data: chats } = useChats();
+    const { data: chats } = useChats({
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        staleTime: Infinity,
+        cacheTime: Infinity
+    });
     const searchDropdownRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
