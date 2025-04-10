@@ -6,11 +6,11 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.ij11</groupId>
-	<artifactId>chatbot</artifactId>
-	<version>server-0.0.1</version>
+	<artifactId>chatbot-server</artifactId>
+	<version>0.0.1</version>
 	<name>chatbot</name>
 	<description>Chatbot fuer Lernfeld 6</description>
 	<url/>

@@ -10,10 +10,12 @@ public class WebResourceConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/{spring:\\w+}").setViewName("forward:/index.html");
-        registry.addViewController("/{spring:\\w+}/").setViewName("forward:/index.html");
         registry.addViewController("/").setViewName("forward:/index.html");
+        registry.addViewController("/{path:[^\\.]*}").setViewName("forward:/index.html");
+        registry.addViewController("/{path:^(?!static).*}/{path2:[^\\.]*}")
+                .setViewName("forward:/index.html");
     }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -252,6 +252,15 @@ public class ChatbotTicketService {
 
     @Transactional
     public void deleteTicket(Long ticketId) {
+        Ticket ticket = ticketService.getTicketById(ticketId)
+                .orElseThrow(() -> new TicketNotFoundException("Ticket not found"));
+
+        ticketNoteRepository.findByTicketOrderByTimestampAsc(ticket)
+                .forEach(note -> ticketNoteRepository.deleteById(note.getId()));
+
+        ticketMessageRepository.findByTicketOrderByTimestampAsc(ticket)
+                .forEach(message -> ticketMessageRepository.deleteById(message.getId()));
+
         ticketService.deleteTicket(ticketId);
     }
 }
