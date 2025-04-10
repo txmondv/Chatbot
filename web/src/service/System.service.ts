@@ -9,3 +9,6 @@ export const getAssistantRequests = async (): Promise<number> =>
 
 export const getAverageResponseTime = async (): Promise<number> => 
     FetchWrapper.get<number>('/api/system/stats/getAverageResponseTime');
+
+export const getCategories = async (): Promise<string[]> => 
+    FetchWrapper.get<string[]>('/api/system/settings/getCategories');

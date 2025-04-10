@@ -113,7 +113,7 @@ const UserManagementPage = () => {
 
                 <div ref={listRef} className="overflow-y-auto pr-2" style={{ maxHeight: listHeight }}>
                     {filteredUsers?.map((user) => (
-                        <div key={user.id} className="flex items-center justify-between p-3 rounded-md bg-zinc-700 mb-2">
+                        <div key={user.userId} className="flex items-center justify-between p-3 rounded-md bg-zinc-700 mb-2">
                             <div className="flex items-center gap-4">
                                 <div className="p-1">
                                     <ProfileImage userName={user.username} />

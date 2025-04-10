@@ -5,20 +5,22 @@ import { getStorageValue } from "../storage/StorageProvider";
 import { AuthProvider, useAuth } from "./custom/Authentication/AuthProvider";
 import { Navbar } from "./custom/Navbar/Navbar";
 import Sidebar from "./custom/Sidebar/Sidebar";
+import DashboardPage from "./pages/admin/DashboardPage";
+import ModelsOverviewPage from "./pages/admin/ModelsOverviewPage";
+import OllamaModelPage from "./pages/admin/OllamaModelPage";
+import UserManagementPage from "./pages/admin/UserManagementPage";
 import ChatPage from "./pages/chats/ChatPage";
 import ChatsOverviewPage from "./pages/chats/ChatsOverviewPage";
+import HomePage from "./pages/home/HomePage";
 import NotFoundPage from "./pages/lib/NotFoundPage";
+import { SupportTicketsPage } from "./pages/tickets/SupportTicketsPage";
+import { UserTicketsPage } from "./pages/tickets/UserTicketsPage";
+import UserTicketViewPage from "./pages/tickets/UserTicketViewPage";
 import LoginPage from "./pages/user/LoginPage";
 import LogoutPage from "./pages/user/LogoutPage";
 import ProfilePage from "./pages/user/ProfilePage";
 import RegisterPage from "./pages/user/RegisterPage";
-import UserManagementPage from "./pages/admin/UserManagementPage";
-import OllamaModelPage from "./pages/admin/OllamaModelPage";
-import ModelsOverviewPage from "./pages/admin/ModelsOverviewPage";
-import { UserTicketsPage } from "./pages/tickets/UserTicketsPage";
-import UserTicketViewPage from "./pages/tickets/UserTicketViewPage";
-import HomePage from "./pages/home/HomePage";
-import DashboardPage from "./pages/admin/DashboardPage";
+import SupportTicketViewPage from "./pages/tickets/SupportTicketViewPage";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { authenticated: isAuthenticated, loading } = useAuth();
@@ -58,6 +60,8 @@ export default function App() {
                           <Route path="/chats/:chatId" element={<ChatPage />} />
                           <Route path="/tickets" element={<UserTicketsPage />} />
                           <Route path="/tickets/:ticketId" element={<UserTicketViewPage />} />
+                          <Route path="/requests" element={<SupportTicketsPage />} />
+                          <Route path="/requests/:ticketId" element={<SupportTicketViewPage />} />
                           <Route path="*" element={<NotFoundPage />} />
                         </Routes>
                       </div>

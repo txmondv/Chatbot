@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class TicketMessageResponse {
     private Long id;
+    private String senderName;
     private Long senderId;
     private TicketMessageSenderRole senderRole;
     private String content;

@@ -2,16 +2,15 @@ package com.ij11.chatbot.service.tickets;
 
 import com.ij11.chatbot.api.dto.tickets.request.*;
 import com.ij11.chatbot.api.dto.tickets.response.TicketMessageResponse;
+import com.ij11.chatbot.api.dto.tickets.response.TicketNoteResponse;
 import com.ij11.chatbot.api.dto.tickets.response.TicketResponse;
 import com.ij11.chatbot.domain.models.chat.Chat;
-import com.ij11.chatbot.domain.models.tickets.Ticket;
-import com.ij11.chatbot.domain.models.tickets.TicketMessage;
-import com.ij11.chatbot.domain.models.tickets.TicketMessageSenderRole;
-import com.ij11.chatbot.domain.models.tickets.TicketStatus;
+import com.ij11.chatbot.domain.models.tickets.*;
 import com.ij11.chatbot.domain.models.users.User;
 import com.ij11.chatbot.domain.models.users.UserRole;
 import com.ij11.chatbot.domain.repositories.ChatRepository;
 import com.ij11.chatbot.domain.repositories.TicketMessageRepository;
+import com.ij11.chatbot.domain.repositories.TicketNoteRepository;
 import com.ij11.chatbot.service.users.UserInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,12 +26,21 @@ public class ChatbotTicketService {
     private final TicketService ticketService;
     private final ChatRepository chatRepository;
     private final TicketMessageRepository ticketMessageRepository;
+    private final TicketNoteRepository ticketNoteRepository;
     private final UserInfoService userService;
 
     public boolean isTicketParticipant(User user, Long ticketId) {
         Ticket ticket = ticketService.getTicketById(ticketId)
                 .orElseThrow(() -> new TicketNotFoundException("Ticket not found"));
-        return ticket.getAssignedSupporters().contains(user) || ticket.getUser().equals(user);
+        return user.hasRole(UserRole.SUPPORT) || ticket.getUser().equals(user);
+    }
+
+    public List<TicketResponse> getTicketsByStatus(TicketStatus status) {
+        List<Ticket> tickets = ticketService.getTicketsByStatus(status);
+
+        return tickets.stream()
+                .map(this::getTicketResponse)
+                .collect(Collectors.toList());
     }
 
     public TicketResponse getTicket(Long ticketId) {
@@ -86,6 +94,7 @@ public class ChatbotTicketService {
                 .map(message -> {
                     TicketMessageResponse response = new TicketMessageResponse();
                     response.setId(message.getId());
+                    response.setSenderName(message.getSender().getUsername());
                     response.setSenderId(message.getSender().getId());
                     response.setSenderRole(message.getSenderRole());
                     response.setContent(message.getContent());
@@ -172,6 +181,46 @@ public class ChatbotTicketService {
         return ticketService.getTicketsByChatId(chatId);
     }
 
+    public List<TicketNoteResponse> getNotesForTicket(Long ticketId) {
+        Ticket ticket = ticketService.getTicketById(ticketId)
+                .orElseThrow(TicketNotFoundException::new);
+        return ticketNoteRepository.findByTicketOrderByTimestampAsc(ticket).stream()
+                .map(note -> {
+                    TicketNoteResponse response = new TicketNoteResponse();
+                    response.setId(note.getId());
+                    response.setTicketId(note.getTicket().getId());
+                    response.setAuthorName(note.getAuthor().getUsername());
+                    response.setAuthorId(note.getAuthor().getId());
+                    response.setContent(note.getContent());
+                    response.setTimestamp(note.getTimestamp());
+                    return response;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addNoteToTicket(User author, AddNoteRequest request) {
+        Ticket ticket = ticketService.getTicketById(request.getTicketId())
+                .orElseThrow(TicketNotFoundException::new);
+
+        TicketNote note = new TicketNote();
+        note.setId(ticketNoteRepository.findMaxId().orElse(0L) + 1);
+        note.setTicket(ticket);
+        note.setContent(request.getContent());
+        note.setAuthor(author);
+
+        ticketNoteRepository.save(note);
+    }
+
+    @Transactional
+    public void removeNoteFromTicket(Long noteId) {
+        if (!ticketNoteRepository.existsById(noteId)) {
+            throw new IllegalArgumentException("Note not found");
+        }
+        ticketNoteRepository.deleteById(noteId);
+    }
+
+
     /**
      * Converts a Ticket entity to a TicketResponse DTO.
      *
@@ -185,11 +234,17 @@ public class ChatbotTicketService {
         response.setDescription(ticket.getDescription());
         response.setCategory(ticket.getCategory());
         response.setUserId(ticket.getUser().getId());
+        response.setUserName(ticket.getUser().getUsername());
         response.setChatId(ticket.getChat() != null ? ticket.getChat().getId() : null);
         response.setStatus(ticket.getStatus());
         response.setSupporterIds(
                 ticket.getAssignedSupporters().stream()
                         .map(User::getId)
+                        .collect(Collectors.toSet())
+        );
+        response.setSupporterNames(
+                ticket.getAssignedSupporters().stream()
+                        .map(User::getUsername)
                         .collect(Collectors.toSet())
         );
         return response;

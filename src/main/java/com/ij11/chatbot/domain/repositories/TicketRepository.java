@@ -13,8 +13,8 @@ import java.util.Optional;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByUser(User user);
-
     List<Ticket> findByChatId(Long chatId);
+    List<Ticket> findByStatus(TicketStatus status);
 
     @Query("SELECT MAX(t.id) FROM Ticket t")
     Optional<Long> findMaxId();

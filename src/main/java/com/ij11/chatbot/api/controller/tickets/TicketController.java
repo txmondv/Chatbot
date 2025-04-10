@@ -1,12 +1,12 @@
 package com.ij11.chatbot.api.controller.tickets;
 
-import com.ij11.chatbot.api.dto.tickets.request.*;
+import com.ij11.chatbot.api.dto.tickets.request.SendTicketMessageRequest;
+import com.ij11.chatbot.api.dto.tickets.request.TicketCreationRequest;
+import com.ij11.chatbot.api.dto.tickets.request.UpdateTicketRequest;
 import com.ij11.chatbot.api.dto.tickets.response.TicketMessageResponse;
 import com.ij11.chatbot.api.dto.tickets.response.TicketResponse;
 import com.ij11.chatbot.core.annotations.Authorized;
-import com.ij11.chatbot.core.annotations.Roles;
 import com.ij11.chatbot.domain.models.users.User;
-import com.ij11.chatbot.domain.models.users.UserRole;
 import com.ij11.chatbot.service.tickets.ChatbotTicketService;
 import com.ij11.chatbot.service.tickets.TicketNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -67,43 +67,6 @@ public class TicketController {
         try {
             chatbotTicketService.sendMessageToTicket(user, request);
             return ResponseEntity.ok().build();
-        } catch (TicketNotFoundException e) {
-            return ResponseEntity.status(406).build();
-        }
-    }
-
-    @Roles({UserRole.SUPPORT, UserRole.MANAGER})
-    @Authorized
-    @PatchMapping("/setStatus")
-    public ResponseEntity<TicketResponse> updateTicketStatus(@RequestBody UpdateTicketStatusRequest request, User user) {
-        if(!chatbotTicketService.isTicketParticipant(user, request.getTicketId())) return ResponseEntity.status(403).build();
-        try {
-            TicketResponse response = chatbotTicketService.updateTicketStatus(request);
-            return ResponseEntity.ok(response);
-        } catch (TicketNotFoundException e) {
-            return ResponseEntity.status(406).build();
-        }
-    }
-
-    @Roles({UserRole.SUPPORT, UserRole.MANAGER})
-    @Authorized
-    @PostMapping("/assign-supporter")
-    public ResponseEntity<TicketResponse> assignSupporterToTicket(@RequestBody AssignSupporterRequest request) {
-        try {
-            TicketResponse response = chatbotTicketService.assignSupporterToTicket(request);
-            return ResponseEntity.ok(response);
-        } catch (TicketNotFoundException e) {
-            return ResponseEntity.status(406).build();
-        }
-    }
-
-    @Roles({UserRole.SUPPORT, UserRole.MANAGER})
-    @Authorized
-    @PostMapping("/unassign-supporter")
-    public ResponseEntity<TicketResponse> unassignSupporterFromTicket(@RequestBody UnassignSupporterRequest request) {
-        try {
-            TicketResponse response = chatbotTicketService.unassignSupporterFromTicket(request);
-            return ResponseEntity.ok(response);
         } catch (TicketNotFoundException e) {
             return ResponseEntity.status(406).build();
         }

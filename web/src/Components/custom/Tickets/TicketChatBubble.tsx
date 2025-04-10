@@ -4,28 +4,30 @@ import { formatDate } from '../../../utils/Formatting.utils';
 
 type TicketChatBubbleProps = {
   message: TicketMessageResponse;
+  userType: 'SUPPORT' | 'USER';
+  userName: string;
 };
 
-const getSenderLabel = (role: TicketMessageSenderRole) => {
+const getSenderLabel = (role: TicketMessageSenderRole, userName: string) => {
   switch (role) {
     case 'USER':
-      return 'Du';
+      return userName;
     case 'SUPPORT':
-      return 'IT-Team';
+      return `IT-Team (${userName})`;
     default:
       return 'Unbekannter Absender';
   }
 };
 
-export const TicketChatBubble: React.FC<TicketChatBubbleProps> = ({ message }) => {
-  const isUser = message.senderRole === 'USER';
-  const sender = getSenderLabel(message.senderRole);
+export const TicketChatBubble: React.FC<TicketChatBubbleProps> = ({ message, userType, userName }) => {
+  const isCurrentUser = message.senderRole === userType;
+  const sender = getSenderLabel(message.senderRole, userName);
 
   return (
-    <div className={`flex w-full gap-2 ${isUser ? 'justify-end' : 'justify-start'}`}>
+    <div className={`flex w-full gap-2 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}>
       <div
         className={`max-w-[80%] px-4 py-2 rounded-2xl text-sm whitespace-pre-wrap ${
-          isUser ? 'bg-blue-600 text-white' : 'bg-zinc-800 text-zinc-100'
+          isCurrentUser ? 'bg-blue-600 text-white' : 'bg-gray-700 text-zinc-100'
         }`}
       >
         <div className="text-xs text-zinc-300 mb-1">{sender}</div>

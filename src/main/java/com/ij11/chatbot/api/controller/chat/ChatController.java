@@ -33,7 +33,7 @@ public class ChatController {
 
     private boolean isChatParticipant(User user, Long chatId) {
         if(getOtherChatParticipants(chatId).contains(user)) return true;
-        return chatService.getChatsByUser(user).stream().noneMatch(chat -> chat.getId().equals(chatId));
+        return chatService.getChatsByUser(user).stream().anyMatch(chat -> chat.getId().equals(chatId));
     }
 
     @Authorized
@@ -47,7 +47,7 @@ public class ChatController {
     @Authorized
     @PostMapping("/{chatId}/message")
     public ResponseEntity<ChatMessage> sendMessage(User user, @PathVariable Long chatId, @RequestBody Map<String, String> body) {
-        if(isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if(!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         String messageContent = body.get("message");
         ChatMessage response = chatService.sendMessage(chatId, messageContent);
         return ResponseEntity.ok(response);
@@ -56,7 +56,7 @@ public class ChatController {
     @Authorized
     @GetMapping("/{chatId}/history")
     public ResponseEntity<List<ChatMessage>> getChatHistory(User user, @PathVariable Long chatId) {
-        if(isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if(!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         List<ChatMessage> messages = chatService.getChatMessages(chatId);
         return ResponseEntity.ok(messages);
     }
@@ -64,7 +64,7 @@ public class ChatController {
     @Authorized
     @PatchMapping("/{chatId}/setTitle")
     public ResponseEntity<ChatInfo> setTitle(User user, @PathVariable Long chatId, @RequestBody Map<String, String> body) {
-        if(isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if(!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         String title = body.get("title");
         chatService.setTitle(chatId, title);
         Optional<ChatInfo> chatInfo = chatService.getChatInfo(chatId);
@@ -74,7 +74,7 @@ public class ChatController {
     @Authorized
     @DeleteMapping("/{chatId}/delete")
     public ResponseEntity<Object> deleteChat(User user, @PathVariable Long chatId) {
-        if(isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if(!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         chatService.deleteChat(chatId);
         return ResponseEntity.status(200).build();
     }
@@ -90,7 +90,7 @@ public class ChatController {
     @GetMapping("/{chatId}")
     public ResponseEntity<ChatInfo> getChatInfo(User user,
                                                 @PathVariable Long chatId) {
-        if (isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if (!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         Optional<ChatInfo> chatInfo = chatService.getChatInfo(chatId);
         return chatInfo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
     }
@@ -99,7 +99,7 @@ public class ChatController {
     @GetMapping("/{chatId}/getSummary")
     public ResponseEntity<ChatSummary> getSummary(User user,
                                                   @PathVariable Long chatId) {
-        if (isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
+        if (!isChatParticipant(user, chatId)) return ResponseEntity.status(403).build();
         Optional<ChatSummary> response = chatService.generateSummary(chatId);
         return response.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
     }

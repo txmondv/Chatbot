@@ -5,7 +5,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 interface TicketHeaderProps {
   title: string;
   category: string;
-  supporters: number[];
+  supporters: string[];
   onEdit: () => void;
   onDelete: () => void;
 }

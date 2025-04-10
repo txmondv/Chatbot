@@ -1,4 +1,4 @@
-type TicketStatus =
+export type TicketStatus =
     | "OPEN"
     | "IN_PROGRESS"
     | "RESOLVED"
@@ -51,15 +51,32 @@ export interface TicketResponse {
     description: string;
     category: string;
     userId: number;
+    userName: string;
     supporterIds: number[];
+    supporterNames: string[];
     chatId: number;
     status: TicketStatus;
 }
 
 export interface TicketMessageResponse {
     id: number;
+    senderName: string;
     senderId: number;
     senderRole: TicketMessageSenderRole;
+    content: string;
+    timestamp: string;
+}
+
+export interface AddNoteRequest {
+    ticketId: number;
+    content: string;
+}
+
+export interface TicketNote {
+    id: number;
+    ticketId: number;
+    authorName: string;
+    authorId: number;
     content: string;
     timestamp: string;
 }

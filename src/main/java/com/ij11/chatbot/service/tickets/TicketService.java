@@ -1,6 +1,7 @@
 package com.ij11.chatbot.service.tickets;
 
 import com.ij11.chatbot.domain.models.tickets.Ticket;
+import com.ij11.chatbot.domain.models.tickets.TicketStatus;
 import com.ij11.chatbot.domain.models.users.User;
 import com.ij11.chatbot.domain.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class TicketService {
         return ticketRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<Ticket> getTicketsByStatus(TicketStatus status) {
+        return ticketRepository.findByStatus(status);
+    }
+
     public List<Ticket> getTicketsByUser(User user) {
         return ticketRepository.findByUser(user);
     }
@@ -52,5 +58,4 @@ public class TicketService {
             throw new IllegalArgumentException("Ticket not found");
         }
     }
-
 }

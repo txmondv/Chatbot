@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import { useChatInfo } from '../../../hooks/Chat.hooks';
 import { ClipLoader } from 'react-spinners';
 import { getTitle } from '../../../utils/Chat.utils';
+import { formatDate } from '../../../utils/Formatting.utils';
 
 interface TicketChatPreviewProps {
   chatId: number;
@@ -50,7 +51,7 @@ const TicketChatPreview: React.FC<TicketChatPreviewProps> = ({
               <AiOutlineCode /> {chat.model}
             </span>
             <span className="flex items-center gap-2 bg-zinc-900 px-3 py-1 rounded-md">
-              <AiOutlineClockCircle /> {chat.lastMessageAt}
+              <AiOutlineClockCircle /> {formatDate(chat.lastMessageAt)}
             </span>
             <span className="flex items-center gap-2 bg-zinc-900 px-3 py-1 rounded-md">
               <AiOutlineMessage /> {chat.messageCount}

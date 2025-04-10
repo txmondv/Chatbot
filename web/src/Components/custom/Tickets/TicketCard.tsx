@@ -1,5 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 import { TicketResponse } from '../../../types/Ticket.types';
+import { statusLabels } from '../../../utils/Ticket.util';
 
 interface TicketCardProps {
   ticket: TicketResponse;
@@ -16,7 +17,7 @@ export const TicketCard = ({ ticket, onOpen, onDelete }: TicketCardProps) => {
       <div className="flex justify-between items-start mb-2">
         <h2 className="text-lg font-bold text-cyan-400">{ticket.title}</h2>
         <span className="bg-cyan-400 text-zinc-900 text-xs font-semibold px-2 py-1 rounded">
-          {ticket.status}
+          {statusLabels[ticket.status]}
         </span>
       </div>
 

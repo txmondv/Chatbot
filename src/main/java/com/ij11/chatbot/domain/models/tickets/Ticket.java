@@ -68,6 +68,10 @@ public class Ticket {
     @OrderBy("timestamp ASC")
     private List<TicketMessage> messages = new ArrayList<>();
 
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("timestamp ASC")
+    private List<TicketNote> notes = new ArrayList<>();
+
     public void removeChat() {
         this.chat = null;
     }

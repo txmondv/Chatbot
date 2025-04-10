@@ -7,26 +7,22 @@ import { TicketChatBubble } from './TicketChatBubble';
 interface TicketChatAreaProps {
   ticketId: number;
   chatId: number;
+  userType: 'SUPPORT' | 'USER';
 }
 
-const TicketChatArea: React.FC<TicketChatAreaProps> = ({ ticketId, chatId }) => {
-  const { data: chatMessages, isLoading, refetch } = useTicketChat(chatId);
+const TicketChatArea: React.FC<TicketChatAreaProps> = ({ ticketId, chatId, userType }) => {
+  const { data: chatMessages, isLoading } = useTicketChat(chatId);
   const sendMessage = useSendTicketMessage();
   const [message, setMessage] = useState('');
-  const [pendingMessages, setPendingMessages] = useState<{ id: number; content: string }[]>([]);
 
   async function handleSendMessage() {
     if (sendMessage.isLoading || !message.trim()) return;
-    const tempId = Date.now();
-    setPendingMessages([{ id: tempId, content: message }]);
-    
     sendMessage.mutate({
       content: message,
       ticketId: ticketId
-    })
-    refetch();
+    });
     setMessage('');
-  };
+  }
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -35,9 +31,13 @@ const TicketChatArea: React.FC<TicketChatAreaProps> = ({ ticketId, chatId }) => 
     }
   };
 
+  const noMessagesText = userType === 'SUPPORT'
+    ? 'Noch keine Nachrichten in diesem Ticket. Antworten Sie dem Benutzer, um zu helfen.'
+    : 'Es gibt noch keine Nachrichten in diesem Ticket. Wir werden uns so schnell wie möglich um dein Anliegen kümmern. Solltest du noch weitere Fragen oder Anmerkungen für das IT-Team haben, schreibe uns gerne hier eine Nachricht!';
+
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto space-y-4 pr-2 mb-4">
+    <div className="flex flex-col h-full max-h-full">
+      <div className="flex-1 min-h-0 overflow-y-auto space-y-4 pr-2 mb-4">
         {isLoading ? (
           <div className="flex justify-center items-center py-10">
             <ClipLoader color="#22d3ee" size={30} />
@@ -48,25 +48,19 @@ const TicketChatArea: React.FC<TicketChatAreaProps> = ({ ticketId, chatId }) => 
               <TicketChatBubble
                 key={msg.id}
                 message={msg}
+                userType={userType}
+                userName={msg.senderName}
               />
             ))}
-            {pendingMessages.map((msg) => (
-              <TicketChatBubble key={msg.id} message={{
-                content: msg.content,
-                id: msg.id,
-                senderId: -1,
-                senderRole: "USER",
-                timestamp: new Date().toISOString()
-              }} />
-            ))}
-            {chatMessages?.length == 0 && pendingMessages.length == 0 && (
-              <div className={`text-zinc-300 text-center py-8`}>
-                Es gibt noch keine Nachrichten in diesem Ticket. Wir werden uns so schnell wie möglich um dein Anliegen kümmern. Solltest du noch weitere Fragen oder Anmerkungen für das IT-Team haben, schreibe uns gerne hier eine Nachricht!
+            {chatMessages?.length === 0 && (
+              <div className="text-zinc-300 text-center py-8">
+                {noMessagesText}
               </div>
             )}
           </>
         )}
       </div>
+
       <div className="flex items-center border-t border-zinc-700 pt-3">
         <input
           type="text"
@@ -85,6 +79,7 @@ const TicketChatArea: React.FC<TicketChatAreaProps> = ({ ticketId, chatId }) => 
         </button>
       </div>
     </div>
+
   );
 };
 

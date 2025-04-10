@@ -1,7 +1,7 @@
 export type UserRole = "SUPPORT" | "TECHNICAL" | "MANAGER";
 
 export interface User {
-    id: number;
+    userId: number;
     username: string;
     roles: UserRole[];
 }

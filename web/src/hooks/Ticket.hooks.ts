@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { createTicket, getTicket, getTicketMessages, getTicketsByUser, sendMessageToTicket, updateTicket } from '../service/Ticket.service';
-import { SendTicketMessageRequest, TicketMessageResponse, TicketResponse } from '../types/Ticket.types';
+import { addTicketNote, assignSupporterToTicket, createTicket, getAllSupporters, getByStatus, getTicket, getTicketMessages, getTicketNotes, getTicketsByUser, removeTicketNote, sendMessageToTicket, unassignSupporterFromTicket, updateTicket, updateTicketStatus } from '../service/Ticket.service';
+import { AddNoteRequest, AssignSupporterRequest, SendTicketMessageRequest, TicketMessageResponse, TicketNote, TicketResponse, TicketStatus, UnassignSupporterRequest, UpdateTicketStatusRequest } from '../types/Ticket.types';
+import { getCategories } from '../service/System.service';
+import { User } from '../types/User.types';
 
 export const useUserTickets = () => {
   return useQuery({
@@ -27,6 +29,7 @@ export const useUpdateTicket = (onSuccess?: () => void) => {
     mutationFn: updateTicket,
     onSuccess: () => {
       queryClient.invalidateQueries(['userTickets']);
+      queryClient.invalidateQueries(['ticket']);
       if (onSuccess) onSuccess();
     },
   });
@@ -53,7 +56,99 @@ export const useTicketChat = (chatId: number) => {
 };
 
 export const useSendTicketMessage = () => {
-  return useMutation((payload: SendTicketMessageRequest) =>
-    sendMessageToTicket(payload)
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: SendTicketMessageRequest) => sendMessageToTicket(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['ticket-chat']);
+    },
+  });
+};
+
+export const useTicketNotes = (ticketId: number) => {
+  return useQuery<TicketNote[]>(
+    ['ticket-notes', ticketId],
+    () => getTicketNotes(ticketId),
+    {
+      enabled: !!ticketId,
+    }
+  );
+};
+
+export const useAddTicketNote = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: AddNoteRequest) => addTicketNote(request),
+    onSuccess: (_, { ticketId }) => {
+      queryClient.invalidateQueries(['ticket-notes', ticketId]);
+    },
+  });
+};
+
+export const useRemoveTicketNote = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (noteId: number) => removeTicketNote(noteId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['ticket-notes']);
+    },
+  });
+};
+
+export const useAssignSupporter = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: AssignSupporterRequest) => assignSupporterToTicket(request),
+    onSuccess: (_, { ticketId }) => {
+      queryClient.invalidateQueries(['ticket', ticketId]);
+      queryClient.invalidateQueries(['userTickets']);
+    },
+  });
+};
+
+export const useUnassignSupporter = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: UnassignSupporterRequest) => unassignSupporterFromTicket(request),
+    onSuccess: (_, { ticketId }) => {
+      queryClient.invalidateQueries(['ticket', ticketId]);
+      queryClient.invalidateQueries(['userTickets']);
+    },
+  });
+};
+
+export const useUpdateTicketStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (request: UpdateTicketStatusRequest) => updateTicketStatus(request),
+    onSuccess: (_, { ticketId }) => {
+      queryClient.invalidateQueries(['ticket', ticketId]);
+      queryClient.invalidateQueries(['userTickets']);
+    },
+  });
+};
+
+export const useTicketsByStatus = (status: TicketStatus) => {
+  return useQuery<TicketResponse[]>(
+    ['support-tickets', status],
+    () => getByStatus(status),
+    {
+      enabled: !!status,
+    }
+  );
+};
+
+
+export const useTicketCategories = () => {
+  return useQuery<string[]>(
+    ['ticketCategories'],
+    () => getCategories()
+  );
+};
+
+export const useAllSupporters = () => {
+  return useQuery<User[]>(
+    ['allSupporters'],
+    () => getAllSupporters()
   );
 };

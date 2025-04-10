@@ -12,7 +12,9 @@ public class TicketResponse {
     private String description;
     private String category;
     private Long userId;
+    private String userName;
     private Set<Long> supporterIds;
+    private Set<String> supporterNames;
     private Long chatId;
     private TicketStatus status;
 }
